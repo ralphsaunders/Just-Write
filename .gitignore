@@ -1,0 +1,8 @@
+# Ignore common crap
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Keep those funky gitkeep files
+!.gitkeep

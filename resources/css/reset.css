@@ -1,0 +1,51 @@
+/* Reset CSS and general classes
+//
+// Sources include:
+// YUI 2: Reset CSS [The Yahoo Reset] 
+// http://developer.yahoo.com/yui/reset/
+//
+// Advice from CSSwizardry
+// http://csswizardry.com/web-design+/
+//
+// Ralph Saunders
+//
+*/
+
+/* Yahoo YUI Reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+fieldset,img { border:0; }
+address,caption,cite,code,dfn,em,th,var { font-style:normal; font-weight:normal; }
+ol,ul { list-style:none; }
+caption,th { text-align:left; }
+h1,h2,h3,h4,h5,h6 { font-size:100%; font-weight:normal; }
+q:before,q:after { content:''; }
+abbr,acronym { border:0; }
+del { text-decoration:line-through; }
+/* Yahoo YUI Reset END */
+
+/* HTML5 Fix */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+/* General CSS Classes */
+.clear        { clear:both; }
+.left         { float:left; }
+.right        { float:right; }
+.none         { float:none; }
+img.left      { margin-right:1em; margin-bottom:1.8em; }
+img.right     { margin-left:1em; margin-bottom:1.8em; }
+.text-right   { text-align:right; }
+.half         { width:45%; /* Not exactly half to account for paddings, margins etc. */ }
+
+.hide{ /* Hide stuff without resorting to display:none; */
+	visibility:hidden;
+	width:0!important;
+	height:0!important;
+	line-height:0!important;
+	padding:0!important;
+	margin:0!important;
+}
+/* General CSS Classes END */

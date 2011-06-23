@@ -1,0 +1,11 @@
+# TODO
+
+- Limit the number of documents listed in the documents list with an option to bring up a full list in a modal window.
+- Change .live( 'click', function() { ... } ); to .delegate() or w/e ( faster )
+- Consistent shortcuts
+- Sort out character encoding - it's fucking broken
+- Redo salts
+- Setup bugracking. Options: redmine, trac, bugzilla.
+- Save current document when user logs out.
+- Hide main menu + logout button when the mouse has stopped moving/the title input isn’t in focus.
+- Sharing, maybe?
