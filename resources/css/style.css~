@@ -1,4 +1,0 @@
-@import "reset.css";
-@import "type.css";
-@import "layout.css";
-@import "jquery.fancybox-1.3.4.css";
