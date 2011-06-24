@@ -1,3 +1,5 @@
+/* Add your details here if you contribute :) */
+
 /* TEAM */
 Mastermind: Ralph Saunders.
 Site: http://ralphsaunders.co.uk
