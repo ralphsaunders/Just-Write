@@ -1,5 +1,6 @@
 # TODO
 
+- When you hit delete, it should show a confirm button; we all misclick sometimes.
 - Change .live( 'click', function() { ... } ); to .delegate() or w/e ( faster )
 - Consistent shortcuts
 - Sort out character encoding - it's broken
