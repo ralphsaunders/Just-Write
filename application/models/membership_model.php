@@ -24,20 +24,27 @@ class Membership_model extends CI_Model
   function create_member()
   {
     $this->db->where('username', $this->input->post('username'));
-    $this->db->where('email', $this->input->post('email'));
     $query = $this->db->get('users');
 
     if($query->num_rows == 0){
-      $new_member_insert_data = array(
-        'username' => $this->input->post('username'),
-        'email' => $this->input->post('email'),
-        'password' => $this->hash_password($this->input->post('password')),
-      );
+      $this->db->where('email', $this->input->post('email'));
+      $query = $this->db->get('users');
+      
+      if($query->num_rows == 0){
 
-      $insert = $this->db->insert('users', $new_member_insert_data);
-      return $insert;
+        $new_member_insert_data = array(
+          'username' => $this->input->post('username'),
+          'email' => $this->input->post('email'),
+          'password' => $this->hash_password($this->input->post('password')),
+        );
+
+        $insert = $this->db->insert('users', $new_member_insert_data);
+        return $insert;
+      } else {
+        return false; 
+      }
     } else {
-      return false;
+      return false; 
     }
   }
 
