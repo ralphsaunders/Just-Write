@@ -10,8 +10,11 @@
 #index, textarea, input { font: 14px/24px Helvetica, Arial, Sans-serif; color:#1A1A1A; }
 .tool-tip { color:#FCFBFB; font:0.875em/1.188em Helvetica, Arial; }
 .error { font-weight:bold; color:#E01B1B; }
+.message { background-color:#D8E9F2; padding:10px; border:1px solid #9FBFCF; }
 .generic-form h2 { color:#999; text-align:center; padding:10px 0; }
 p { margin-bottom:1em; }
+em { font-style:italic; }
+
 
 /* | Headings */
 h1, h2, h3, h4, h5 { font-weight:bold; }

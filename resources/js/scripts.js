@@ -30,6 +30,14 @@ $(document).ready(function(){
     $( '#document' ).height( $( window ).height() - 110 );
   })
 
+  // Hides message on signup form
+  $( '.generic-form .message' ).hide();
+
+  // When you focus on the email field
+  $( 'input[name$=email]' ).focus( function(){
+    $( '.generic-form .message' ).slideDown( 200 );
+  })
+
   // Hides the document controls dropdown
   $( '#document-controls' ).hide();
   
