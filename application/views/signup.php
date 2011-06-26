@@ -9,7 +9,7 @@
       echo form_input('username', set_value('A Username is required', 'Username'));
       echo form_input('email', set_value('Your e-mail is required', 'Email'));
     ?>
-      <p class="message">Don't worry, we wont share your email with <em>anyone</em> &mdash; we hate spam too.</p>
+      <p class="message">Don't worry, we wont share your email with <em><strong>anyone</strong></em> &mdash; we hate spam too.</p>
     <?php
       echo form_password('password', set_value('Your password is required', 'Password'));
 
