@@ -102,11 +102,11 @@
 
 #new-document img { vertical-align:1px; }
 
-#title { margin:0 auto; text-align:center; }
+#title { margin:0 auto; text-align:center; width:45%; }
 #title input:focus { outline:none; }
 #title input {
   padding:5px;
-  width:auto;
+  width:100%;
   background:transparent;
   border:none;
   color:#FCFBFB;
@@ -174,7 +174,7 @@
 .more { float:right!important; margin-right:50px!important; }
 
 /* | Document textarea */
-#document-container { padding:70px 40px 40px 40px; background-color:#FCFCFC; }
+#document-container { padding:70px 40px 50px 40px; background-color:#FCFCFC; }
 #document { width:90%; margin:0 auto; border:none; display:block; height:1000px; background:transparent; resize:none; padding:0 30px; }
 #document:focus { outline:none; }
 

@@ -22,12 +22,12 @@ $(document).ready(function(){
 
   // Sets widths + heights for the navigation and document 
   $( '#control-bar' ).width( $( window ).width() - 73 );
-  $( '#document' ).height( $( window ).height() - 110 );
+  $( '#document' ).height( $( window ).height() - 120 );
 
   // When window is resized update heights + widths
   $( window ).resize( function() {
     $( '#control-bar' ).width( $( window ).width() - 73 );
-    $( '#document' ).height( $( window ).height() - 110 );
+    $( '#document' ).height( $( window ).height() - 120 );
   })
 
   // Hides message on signup form
@@ -76,7 +76,7 @@ $(document).ready(function(){
     $( '#main-menu, #logout' ).fadeIn( 200 );
     
     if ( focused == false ) {
-      i = setTimeout( hideControls, 4000);
+      i = setTimeout( hideControls, 8000);
     }
   })
  
