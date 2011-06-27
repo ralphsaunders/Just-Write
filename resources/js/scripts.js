@@ -55,33 +55,36 @@ $(document).ready(function(){
   // $( 'input[name$=current-doc-title]:focus' )
 
 
-  function hideControlBar() {
-    $( '#control-bar' ).stop( true, true ).fadeOut( 500 );
+  function hideControls() {
+    $( '#main-menu, #logout' ).stop( true, true ).fadeOut( 500 );
   }
 
-  function showOnMouseMove() {
-    var i = null;
+  // Damn dirty hack, but it works
+  var i = null;
+  var focused = false;
 
-    $("#index").mousemove(function() {
-      
-      $( '#control-bar' ).fadeIn( 200 );
-      
-      clearTimeout( i );
-      i = setTimeout( hideControlBar, 1000);
+  $( 'input[name$=current-doc-title]' ).live( 'focus', function() {
+    focused = true;
+  }) 
 
-    }).mouseleave(function() {
-
-      clearTimeout(i);
-      i = setTimeout( hideControlBar, 1000);
-
-    })
-  }
-  
-  $( 'input[name$=current-doc-title]' ).focusout( function(){
-    //i = setTimeout( showOnMouseMove, 10);
-  }).focusin( function(){
-    //clearTimeout( i );
+  $( 'input[name$=current-doc-title]' ).live( 'blur', function() {
+    focused = false;
   })
+
+  $( '#index' ).mousemove( function() {
+    clearTimeout( i );
+    $( '#main-menu, #logout' ).fadeIn( 200 );
+    
+    if ( focused == false ) {
+      i = setTimeout( hideControls, 4000);
+    }
+  })
+ 
+  
+
+  /*if ( $( 'input[name$=current-doc-title]' ).is( ':focus' ) ) {
+    i = null;
+  }*/
 
   function refreshDocuments(fn) {
     // List documents from this user
@@ -197,7 +200,7 @@ $(document).ready(function(){
     var content = $( '#document' ).val();
     var id = $( '#document' ).attr( 'class' );
 
-    $( '#saving-icon' ).stop( true, true ).fadeIn( 50 );
+    $( '#saving-icon' ).fadeIn( 50 );
 
     $.ajax({
       url: siteUrl + 'document/save',
@@ -371,4 +374,11 @@ $(document).ready(function(){
     $( '#about-just-write' ).stop( true, true ).fadeIn( 200 );
     return false;
   })
+
+  $( '#document' ).focus( function() {
+    if ( $( '#document-controls' ).is( ':visible' ) ) {
+      $( '#document-controls' ).slideUp( 200 );
+    }
+  })
+
 }); 

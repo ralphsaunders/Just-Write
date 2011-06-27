@@ -37,6 +37,9 @@ a:hover { color:#666666; }
 #sign-up { padding:6px 22px; background-color:#363636; color:#fcfbfb; border-radius:5px; }
 #sign-up:hover { background-color:#3c9fe6; }
 
+/* | Document title */
+#title input { font:bold 1em/1em Helvetica, Arial, Sans-serif; letter-spacing:-1px; }
+
 /* | Document Controls */
 #document-controls { font-weight:bold; } 
 .more a{ color:#61A0E8; }
@@ -50,4 +53,14 @@ a:hover { color:#666666; }
 /* | All Documents */
 .timestamp { color:#D1D1D1; }
 a:hover .timestamp { color:#666666; }
-#all-documents li a:hover { color:#61A0E8; } 
+#all-documents li a:hover { color:#61A0E8; }
+
+/* | Mobile Styles */
+@media only screen and (max-width : 480px) {
+  
+  /* |- Global Font Styles */
+  #index, textarea, input { font-size:12px; line-height:22px; }
+
+  /* Document Title */
+  #title input { font:bold 0.875em/0.875em Helvetica, Arial, Sans-serif; letter-spacing:-1px; }
+}

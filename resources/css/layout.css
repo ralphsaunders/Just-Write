@@ -110,8 +110,8 @@
   background:transparent;
   border:none;
   color:#FCFBFB;
-  font:bold 16px/21px Helvetica, Arial, Sans-serif;
   text-align:center;
+  height:20px;
 }
 
 #save { margin-right:20px; }
@@ -209,3 +209,14 @@ div.edit { margin-top:20px; }
 .timestamp { float:right; margin-right:20px; }
 
 /* Mobile Styles */
+@media only screen and (max-width : 480px) {
+
+  /* Document list */
+  #document-controls li { margin-bottom:10px; }
+  .more { margin-bottom:0!important; margin-top:10px; }
+
+  /* All Documents modal window */
+  #all-documents { width:300px; margin-left:-170px; }
+  #all-documents-list .doc-title { width:160px; }
+
+}
