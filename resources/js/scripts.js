@@ -76,7 +76,7 @@ $(document).ready(function(){
     $( '#main-menu, #logout' ).fadeIn( 200 );
     
     if ( focused == false ) {
-      i = setTimeout( hideControls, 8000);
+      i = setTimeout( hideControls, 6000);
     }
   })
  
