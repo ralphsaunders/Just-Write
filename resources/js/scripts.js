@@ -74,7 +74,7 @@ $(document).ready(function(){
   $( '#index' ).mousemove( function() {
     clearTimeout( i );
     $( '#main-menu, #logout' ).fadeIn( 200 );
-    
+
     if ( focused == false ) {
       i = setTimeout( hideControls, 6000);
     }
