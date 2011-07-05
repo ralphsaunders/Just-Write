@@ -4,8 +4,7 @@ class Membership_model extends CI_Model
 {
   public function hash_password($password)
   {
-      $config['encryption_key'] = "pPjL3CadR404692mR8wJKdXCXKe6ECPL";
-      return hash_hmac("sha512", $password, $config['encryption_key']);
+    return hash_hmac( "sha512", $password, $this->config->item('encryption_key') );
   }
 
   function validate()
