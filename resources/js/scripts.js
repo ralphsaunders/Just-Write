@@ -212,7 +212,7 @@ $(document).ready(function(){
 
         $( '#document' ).attr( 'class', result );
 
-        $( '#saving-icon' ).stop( true, true ).fadeOut( 300 );
+        $( '#saving-icon' ).fadeOut( 300 );
         $( '#saved' ).stop( true, true ).delay( 400 ).fadeIn( 100 ).delay( 1000 ).fadeOut( function() {
           refreshDocuments( function() {
             $( '.delete a' ).hide();
