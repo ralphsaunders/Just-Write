@@ -4,5 +4,5 @@ If you want to run Just Write on your own server, you'll need to change a few th
 
 - Line 17 of /application/config/config.php
 - Lines 4 and 5 of /resources/js/scripts.php 
-- The keys on Line 227 of /application/config/config.php and line 7 of /application/models/membership_model.php should match
+- The key on Line 227 of /application/config/config.php should be set by you and should be as random as possible.
 
