@@ -48,7 +48,7 @@
     <li id="title"><input name="current-doc-title" value="<?php echo html_entity_decode( $title, ENT_QUOTES, "UTF-8" ); ?>"  tabindex="1" /></li>
 
     <li id="current-doc-controls">
-      <span id="save">
+      <span id="save" class="button">
         <span id="saving">
           <img id="saving-icon" src="<?php echo base_url(); ?>resources/imgs/loader.gif" alt="saving" width="20" height="20" />
           <img id="saved" src="<?php echo base_url(); ?>resources/imgs/tick.png" alt="saved" width="10" height="10" />

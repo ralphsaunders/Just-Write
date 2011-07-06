@@ -195,6 +195,58 @@ class Document_model extends CI_Model
     } else {
       return false;
     }
+  }
+
+  function new_html_doc( $doc )
+  {
+    $this->db->where( 'user_id', $this->get_user_id() );
+    $this->db->where( 'id', $doc['id'] );
+    $query = $this->db->get( 'exported_documents' ); 
+
+    if( $query->num_rows() == 0 )
+    // If there weren't any documents with this id
+    {
+      $store_document_insert_data = array(
+        'user_id' => $this->get_user_id(),
+        'title'   => $doc['title'],
+        'content' => $doc['content']
+      );
+
+      // Insert new data
+      $insert = $this->db->insert('exported_documents', $store_document_insert_data);
+
+    } 
+    elseif( $query->num_rows() == 1 )
+    {
+      // New data
+      $store_document_insert_data = array(
+        'user_id' => $this->get_user_id(),
+        'title'   => $doc['title'],
+        'content' => $doc['content']
+      );
+
+      // Update the row
+      $this->db->where( 'user_id', $this->get_user_id() );
+      $this->db->where( 'id', $doc['id'] );
+      $update = $this->db->update('exported_documents', $store_document_insert_data);
+    } 
+
+    // Give back ID of the last saved document
+    $this->db->where( 'user_id', $this->get_user_id() );
+    $this->db->order_by( 'last_edited', 'desc' );
+    $docs = $this->db->get( 'exported_documents' );
+
+    if( $docs->num_rows() > 0 )
+    {
+      foreach( $docs->result() as $id )
+      {
+        $results[] = $id->id;
+      }
+
+      return $results;
+    } else {
+      return false;
+    }
   } 
 }
 ?>

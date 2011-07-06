@@ -125,19 +125,29 @@ class Document extends CI_Controller {
   
   function markdown_to_html()
   {
-    if( $_POST && $_POST['content'] )
+    if( $_POST && $_POST['content'] && $_POST['id'] && $_POST['title'] )
     {
       $content = $this->security->xss_clean( $_POST['content'] );
+      $title   = $this->security->xss_clean( $_POST['title'] );
 
       $this->load->helper( 'markdown' );
-      $html = markdown( $content );
+      $doc = array(
+        'id'      => $_POST['id'],
+        'title'   => markdown( $title ),
+        'content' => markdown( $content )
+      );
 
-      if ( $html )
+      $this->load->model( 'document_model' );
+      if( $query = $this->document_model->new_html_doc( $doc ) )
       {
-        echo json_encode( $html );
-      } else {
-        return false;
+        $doc['id'] = $query[0];
+        echo json_encode( $doc );
       }
+
+    }
+    else
+    {
+      return false;
     }
   }
 

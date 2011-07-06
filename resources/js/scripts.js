@@ -56,7 +56,7 @@ $(document).ready(function(){
 
 
   function hideControls() {
-    $( '#main-menu, #logout' ).stop( true, true ).fadeOut( 500 );
+    $( '#main-menu, #logout' ).fadeOut( 500 );
   }
 
   // Damn dirty hack, but it works
@@ -65,15 +65,22 @@ $(document).ready(function(){
 
   $( 'input[name$=current-doc-title]' ).live( 'focus', function() {
     focused = true;
-  }) 
+  })
+
+  if( $( '#index' ).attr( 'class' ) == 'exporting' ) {
+    focused = true;
+  }
 
   $( 'input[name$=current-doc-title]' ).live( 'blur', function() {
     focused = false;
   })
 
   $( '#index' ).mousemove( function() {
-    clearTimeout( i );
-    $( '#main-menu, #logout' ).fadeIn( 200 );
+
+    if( $( '#index' ).attr( 'class' ) == null ) {
+      clearTimeout( i );
+      $( '#main-menu, #logout' ).fadeIn( 200 );
+    }
 
     if ( focused == false ) {
       i = setTimeout( hideControls, 6000);
@@ -306,21 +313,57 @@ $(document).ready(function(){
 
   // Convert markdown to html
   $( '.markdown-to-html' ).live( 'click', function() {
+    var title = $( 'input[name$=current-doc-title]' ).val();
     var content = $( '#document' ).val();
+    var id = $( '#document' ).attr( 'class' );
+    var normalNav = $( '#control-bar' ).children();
+
+    $( '#index' ).attr( 'class', 'exporting' );
+    $( '#control-bar, #document, #logout' ).animate({
+      opacity: 0.0
+    }, 400, function(){
+      var markdownNav = new Array();
+
+      markdownNav.push( '<li id="doc-controls"><span id="back" class="button"><a href="#" id="back-to-document" title="Back to Document">Back to Document' );
+      markdownNav.push( '</a></span></li>' );
+      
+      markdownNav.push ( '<li id="title"><input name="current-doc-title" value="' + title + ' ( HTML export )" tabindex="1"></li>' );
+
+      $( '#control-bar' ).html( markdownNav.join( '' ) );
+
+      $( '#control-bar' ).animate({
+        opacity: 1
+      }, 400, function(){
+        $( '#index' ).removeAttr( 'class' );
     
-    $.ajax({
-      url: siteUrl + 'document/markdown_to_html',
-      type: "POST",
-      data: ({ content:content }),
-      async: false,
-      success: function (data) { 
-        var html = $.parseJSON(data);
-        
-        // Populate textarea with html and select said html,
-        // ready for copy/paste.
-        $( '#document' ).val( html ).focus().select(); 
-        
-      }
+    
+        $.ajax({
+          url: siteUrl + 'document/markdown_to_html',
+          type: "POST",
+          data: ({ id:id, content:content, title:title }),
+          async: false,
+          success: function (data) { 
+            var result = $.parseJSON(data);
+            console.log( result );
+            
+            $( '#document-container' ).attr( 'class', 'exported' );
+
+            $( '#document' ).val( result.content );
+
+            $( '#document' ).animate({
+              opacity: 1
+            }, 400, function(){
+              // Animation complete 
+            })
+
+            // $( '#document' ).attr( 'class', result );
+            // Populate textarea with html and select said html,
+            // ready for copy/paste.
+            
+          }
+        })
+
+      })
     })
     return false;
   })
