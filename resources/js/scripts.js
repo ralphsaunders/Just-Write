@@ -21,12 +21,12 @@ $(document).ready(function(){
   });
 
   // Sets widths + heights for the navigation and document 
-  $( '#control-bar' ).width( $( window ).width() - 73 );
+  var currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
   $( '#document' ).height( $( window ).height() - 120 );
 
   // When window is resized update heights + widths
   $( window ).resize( function() {
-    $( '#control-bar' ).width( $( window ).width() - 73 );
+    currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
     $( '#document' ).height( $( window ).height() - 120 );
   })
 
@@ -76,9 +76,9 @@ $(document).ready(function(){
   })
 
   $( '#index' ).mousemove( function() {
+    clearTimeout( i );
 
     if( $( '#index' ).attr( 'class' ) == null ) {
-      clearTimeout( i );
       $( '#main-menu, #logout' ).fadeIn( 200 );
     }
 
@@ -319,9 +319,9 @@ $(document).ready(function(){
     var normalNav = $( '#control-bar' ).children();
 
     $( '#index' ).attr( 'class', 'exporting' );
-    $( '#control-bar, #document, #logout' ).animate({
-      opacity: 0.0
-    }, 400, function(){
+    $( '#control-bar' ).animate({
+      opacity: 0 
+    }, 200, function(){
       var markdownNav = new Array();
 
       markdownNav.push( '<li id="doc-controls"><span id="back" class="button"><a href="#" id="back-to-document" title="Back to Document">Back to Document' );
@@ -333,7 +333,7 @@ $(document).ready(function(){
 
       $( '#control-bar' ).animate({
         opacity: 1
-      }, 400, function(){
+      }, 200, function(){
         $( '#index' ).removeAttr( 'class' );
     
     
@@ -352,7 +352,7 @@ $(document).ready(function(){
 
             $( '#document' ).animate({
               opacity: 1
-            }, 400, function(){
+            }, 200, function(){
               // Animation complete 
             })
 
@@ -365,8 +365,29 @@ $(document).ready(function(){
 
       })
     })
+
+    $( '#back-to-document' ).live( 'click', function() {
+      $( '#control-bar, #document' ).animate({
+        opacity: 0
+      }, 200, function() {
+        $( '#control-bar' ).html( normalNav ).animate({
+          opacity: 1
+        }, 200, function() {
+          $( '#document' ).val( content );
+          $( '#logout, #document' ).animate({
+            opacity:1
+          }, 200, function(){
+            // Animation Complete
+          })
+        })
+      });
+
+    })
+
     return false;
   })
+
+  
 
   $( '.more' ).live( 'click', function() {
     loadAllDocuments();
