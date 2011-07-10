@@ -200,16 +200,17 @@ class Document_model extends CI_Model
   function new_html_doc( $doc )
   {
     $this->db->where( 'user_id', $this->get_user_id() );
-    $this->db->where( 'id', $doc['id'] );
+    $this->db->where( 'origin_id', $doc['id'] );
     $query = $this->db->get( 'exported_documents' ); 
 
     if( $query->num_rows() == 0 )
     // If there weren't any documents with this id
     {
       $store_document_insert_data = array(
-        'user_id' => $this->get_user_id(),
-        'title'   => $doc['title'],
-        'content' => $doc['content']
+        'user_id'   => $this->get_user_id(),
+        'origin_id' => $doc['id'],
+        'title'     => $doc['title'],
+        'content'   => $doc['content']
       );
 
       // Insert new data

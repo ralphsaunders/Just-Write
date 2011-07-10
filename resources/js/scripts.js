@@ -188,7 +188,7 @@ $(document).ready(function(){
   // Every 60 seconds
   setInterval( function() {
     //If document controls is hidden, save document
-    if( $( '#document-controls' ).is( ':hidden' ) && $( '#all-documents' ).is( ':hidden' ) ){
+    if( $( '#document-controls' ).is( ':hidden' ) && $( '#all-documents' ).is( ':hidden' ) && $( '#document-container' ).attr() == null ){
       saveDocument();
     }
   }, 60000 )
