@@ -89,7 +89,7 @@
 
 
 /* |- Document controls */
-#doc-controls, #current-doc-controls { margin-top:5px; }
+#doc-controls, #current-doc-controls { margin-top:4px; }
 #doc-controls { float:left; }
 #current-doc-controls { float:right; }
 #doc-link { position:relative; }

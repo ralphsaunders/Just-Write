@@ -324,7 +324,7 @@ $(document).ready(function(){
     }, 200, function(){
       var markdownNav = new Array();
 
-      markdownNav.push( '<li id="doc-controls"><span id="back" class="button"><a href="#" id="back-to-document" title="Back to Document">Back to Document' );
+      markdownNav.push( '<li id="doc-controls"><span id="back" class="button"><a href="#" id="back-to-document" title="Back to Document">Back' );
       markdownNav.push( '</a></span></li>' );
       
       markdownNav.push ( '<li id="title"><input name="current-doc-title" value="' + title + ' ( HTML export )" tabindex="1"></li>' );
