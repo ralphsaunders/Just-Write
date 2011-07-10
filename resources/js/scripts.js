@@ -76,7 +76,7 @@ $(document).ready(function(){
     clearTimeout( i );
 
     if( $( '#index' ).attr( 'class' ) == null ) {
-      $( '#main-menu, #logout' ).fadeIn( 200 );
+      $( '#main-menu, #logout' ).fadeIn( 300 );
     }
 
     if ( focused == false ) {
