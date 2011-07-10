@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 
   // Hides input value on focus
-  $('input:text, input:password').each(function() {
+  $( 'input:text, input:password' ).each(function() {
     var default_value = this.value;
     $(this).focus(function() {
       if(this.value == default_value) {
@@ -51,10 +51,6 @@ $(document).ready(function(){
   $( '.delete' ).hide();
 
   // Hides the control bar unless mouse is moving
-  
-  // $( 'input[name$=current-doc-title]:focus' )
-
-
   function hideControls() {
     $( '#main-menu, #logout' ).fadeOut( 500 );
   }
@@ -64,6 +60,7 @@ $(document).ready(function(){
   var focused = false;
 
   $( 'input[name$=current-doc-title]' ).live( 'focus', function() {
+    // Stops UI from hiding
     focused = true;
   })
 
@@ -87,12 +84,6 @@ $(document).ready(function(){
     }
   })
  
-  
-
-  /*if ( $( 'input[name$=current-doc-title]' ).is( ':focus' ) ) {
-    i = null;
-  }*/
-
   function refreshDocuments(fn) {
     // List documents from this user
     $.ajax({ 
@@ -319,7 +310,7 @@ $(document).ready(function(){
     var normalNav = $( '#control-bar' ).children();
 
     $( '#index' ).attr( 'class', 'exporting' );
-    $( '#control-bar' ).animate({
+    $( '#control-bar, #document' ).animate({
       opacity: 0 
     }, 200, function(){
       var markdownNav = new Array();
