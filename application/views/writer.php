@@ -59,6 +59,10 @@
       <span id="export">
         <a class="markdown-to-html" href="#" title="Export to HTML"><img src="<?php echo base_url(); ?>resources/imgs/export.png" alt="Export to HTML"><span class="tool-tip">Export to HTML</span></a>
       </span>
+
+      <span id="publish">
+        <a class="publish" href="#" title="This will make the document viewable to the public">Publish</a>
+      </span>
     </li>
 
   </ul>

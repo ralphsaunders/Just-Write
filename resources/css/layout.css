@@ -43,6 +43,12 @@
   cursor:pointer;
 }
 
+/* | Generic Document */
+.generic-document { width:650px; margin:0 auto; padding:2em 0; }
+
+/*   |- Meta */
+.generic-meta { width:650px; margin:0 auto; padding:1em 0; border-top:1px dashed #CCCCCC; }
+
 /* | Tool-tips */
 #control-bar a { position:relative; }
 .tool-tip { 
@@ -64,7 +70,7 @@
 
 /* - Specific Styles */
 
-/* | Body of document */
+/* | Body of page */
 #index { position:relative; }
 
 /* | Landing page */
@@ -72,6 +78,10 @@
 
 /* | About Just Write */
 #about-just-write { clear:both; margin-top:40px; }
+
+/* | Published Document */
+#published-document { background-color:#F5F4F2; }
+.back-to-editor { width:650px; margin:0 auto; margin-bottom:1em; }
 
 /* | Control bar for writer view */
 #main-menu { position:fixed; }
@@ -95,7 +105,7 @@
 #doc-link { position:relative; }
 #doc-link img { vertical-align:-4px; margin-right:20px; } 
 
-#document-controls { background-color:#FCFCFC; overflow:hidden; padding:5px; float:left; width:100%; }
+#document-controls { background-color:#FCFCFC; overflow:hidden; padding:5px; float:left; width:100%; margin:0; }
 #document-controls li { display:block; float:left;  text-decoration:none; margin-right:10px; }
 .block li { float:none!important; }
 #document-controls a, #all-documents li a { padding-right:10px; }
@@ -200,7 +210,7 @@
 }
 
 #all-documents-list { height:315px; overflow-y:auto }
-#all-documents-list li { clear:both; margin-bottom:10px; overflow:hidden; }
+#all-documents-list li { clear:both; margin-bottom:10px; overflow:hidden; list-style:none; }
 #all-documents-list .delete { float:left; }
 #all-documents-list .doc-title { float:left; width:310px; }
 .close img { position:absolute; top:-13px; right:-14px; background-color:#363636; padding:7px; border-radius:5px; }

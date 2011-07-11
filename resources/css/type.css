@@ -1,21 +1,29 @@
 /*
  * Layout
+ * - Common Styles
  * - Generic Styles
  * - Specific Styles
  * - Mobile Styles
  *
 */
 
-/* - Generic Styles */
+/* - Common Styles */
 #index, textarea, input { font: 14px/24px Helvetica, Arial, Sans-serif; color:#1A1A1A; }
 .tool-tip { color:#FCFBFB; font:0.875em/1.188em Helvetica, Arial; }
 .error { font-weight:bold; color:#E01B1B; }
 .message { background-color:#D8E9F2; padding:10px; border:1px solid #9FBFCF; }
-.generic-form h2 { color:#999; text-align:center; padding:10px 0; }
 p { margin-bottom:1em; }
 em { font-style:italic; }
 strong { font-weight:bold; }
+ol, ul { margin-bottom:1em; }
 
+/* - Generic Styles */
+
+/* |- Forms */
+.generic-form h2 { color:#999; text-align:center; padding:10px 0; }
+
+/* |- Published Documents */
+.generic-document { font:1.143em/1.857em Georgia, serif; }
 
 /* | Headings */
 h1, h2, h3, h4, h5 { font-weight:bold; }
@@ -25,7 +33,7 @@ h2 { font-size:1.375em; line-height:1.75em; }
 h3 { font-size:1.25em; line-height:1.625em; }
 h4 { font-size:1.125em; line-height:1.5em; }
 h5 { font-size:1em; line-height:1.313em; font-style:italic; }
-h6 { font:bold-italic 0.875em/1.188em Georgia, 'serif'; }
+h6 { font:bold italic 0.875em/1.188em Georgia, 'serif'; }
 
 /* | Links */
 a { font-weight:bold; text-decoration:none; color:#B5B5B5; }
@@ -38,7 +46,7 @@ a:hover { color:#666666; }
 #sign-up:hover { background-color:#3c9fe6; }
 
 /* | Document title */
-#title input { font:bold 1em/1em Helvetica, Arial, Sans-serif; letter-spacing:-1px; }
+#title input { font:bold 1em/1em Helvetica, Arial, Sans-serif; letter-spacing:0px; }
 
 /* | Document Controls */
 #document-controls { font-weight:bold; } 

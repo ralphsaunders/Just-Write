@@ -133,7 +133,7 @@ class Document extends CI_Controller {
       $this->load->helper( 'markdown' );
       $doc = array(
         'id'      => $_POST['id'],
-        'title'   => markdown( $title ),
+        'title'   => $title,
         'content' => markdown( $content )
       );
 
@@ -162,6 +162,33 @@ class Document extends CI_Controller {
       } else {
         return false;
       }
+    }
+  }
+
+  function publish()
+  {
+    if( $_POST && $_POST['content'] && $_POST['id'] && $_POST['title'] )
+    {
+      $content = $this->security->xss_clean( $_POST['content'] );
+      $title   = $this->security->xss_clean( $_POST['title'] );
+
+      $this->load->helper( 'markdown' );
+      $doc = array(
+        'id'      => $_POST['id'],
+        'title'   => $title,
+        'content' => markdown( $content )
+      );
+
+      $this->load->model( 'document_model' );
+      if( $query = $this->document_model->publish( $doc ) )
+      {
+        echo json_encode( $query[0] );
+      }
+    
+    }
+    else
+    {
+      return false;
     }
   }
 

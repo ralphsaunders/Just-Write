@@ -39,8 +39,8 @@ class Document_model extends CI_Model
     {
       $store_document_insert_data = array(
         'user_id' => $this->get_user_id(),
-        'title' => htmlentities( $data['title'], ENT_QUOTES, "UTF-8" ),
-        'content' => htmlentities( $data['content'], ENT_QUOTES, "UTF-8" )
+        'title' => $data['title'],
+        'content' => $data['content']
       );
 
       // Insert new data
@@ -51,8 +51,8 @@ class Document_model extends CI_Model
       // New data
       $store_document_insert_data = array(
         'user_id' => $this->get_user_id(),
-        'title' => htmlentities( $data['title'], ENT_QUOTES, "UTF-8" ),
-        'content' => htmlentities( $data['content'], ENT_QUOTES, "UTF-8" )
+        'title' => $data['title'],
+        'content' => $data['content']
       );
 
       // Update the row
@@ -188,13 +188,31 @@ class Document_model extends CI_Model
       // Take it out of the MySQL stuff
       foreach ( $query->result() as $row )
       {
-        $documents[] = $row;
+        $documents['docs'][] = $row;
       }
 
-      return $documents;
-    } else {
+    }
+    else
+    {
       return false;
     }
+
+    $this->db->where( 'user_id', $this->get_user_id() );
+    $this->db->order_by( 'last_edited', 'desc' );
+    $query = $this->db->get( 'exported_documents' );
+
+    if( $query->num_rows() > 0 )
+    {
+      // Take it out of the MySQL stuff
+      foreach ( $query->result() as $row )
+      {
+        $documents['exported_docs'][] = $row;
+      }
+
+    }
+
+    return $documents;
+
   }
 
   function new_html_doc( $doc )
@@ -221,14 +239,15 @@ class Document_model extends CI_Model
     {
       // New data
       $store_document_insert_data = array(
-        'user_id' => $this->get_user_id(),
-        'title'   => $doc['title'],
-        'content' => $doc['content']
+        'user_id'   => $this->get_user_id(),
+        'origin_id' => $doc['id'],
+        'title'     => $doc['title'],
+        'content'   => $doc['content']
       );
 
       // Update the row
       $this->db->where( 'user_id', $this->get_user_id() );
-      $this->db->where( 'id', $doc['id'] );
+      $this->db->where( 'origin_id', $doc['id'] );
       $update = $this->db->update('exported_documents', $store_document_insert_data);
     } 
 
@@ -242,6 +261,56 @@ class Document_model extends CI_Model
       foreach( $docs->result() as $id )
       {
         $results[] = $id->id;
+      }
+
+      return $results;
+    } else {
+      return false;
+    }
+  }
+
+  function publish( $doc )
+  {
+    // Set data
+    $store_document_insert_data = array(
+      'user_id'   => $this->get_user_id(),
+      'origin_id' => $doc['id'],
+      'title'     => $doc['title'],
+      'content'   => $doc['content']
+    );
+
+    // Insert new data
+    $insert = $this->db->insert('published_documents', $store_document_insert_data);
+
+    // Grab data from database
+    $this->db->where( 'user_id', $this->get_user_id() );
+    $this->db->order_by( 'export_timestamp', 'desc' );
+    $docs = $this->db->get( 'published_documents' );
+
+    if( $docs->num_rows() > 0 )
+    {
+      foreach( $docs->result() as $doc )
+      {
+        $results[] = $doc; 
+      }
+      return $results;
+    } 
+    else 
+    {
+      return false;
+    }
+  }
+
+  function published_document_lookup( $id )
+  {
+    $this->db->where( 'id', $id );
+    $query = $this->db->get( 'published_documents' ); 
+
+    if( $query->num_rows() == 1 )
+    {
+      foreach( $query->result() as $row )
+      {
+        $results[] = $row;
       }
 
       return $results;

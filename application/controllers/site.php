@@ -30,13 +30,25 @@ class Site extends CI_Controller {
     }
   }
   
-  public function index()
+  public function index( $id = null )
   {
     if( $this->is_logged_in() ){
       redirect( 'document/load_last_open_document', 'refresh' ); 
     } else {
       $data['title'] = 'Just Write';
       $data['main_content'] = 'landing';
+      $this->load->view('includes/template', $data);
+    }
+  }
+
+  public function published( $id )
+  {
+    $this->load->model( 'document_model' );
+    if( $query = $this->document_model->published_document_lookup( $id ) )
+    {
+      $data['title'] = $query[0]->title . " | published with Just Write";
+      $data['document'] = $query;
+      $data['main_content'] = 'published';
       $this->load->view('includes/template', $data);
     }
   }

@@ -3,6 +3,9 @@
 <head>
   <title><?php if (isset($title)) { echo $title; } else { echo "Untitled"; } ?></title>
 
+  <!-- Character Encoding -->
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
   <!-- Favicon -->
   <link rel="shortcut icon" href="<?php echo base_url(); ?>resources/imgs/favicon.ico" /> 
 

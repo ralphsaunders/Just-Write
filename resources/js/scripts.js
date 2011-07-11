@@ -398,12 +398,22 @@ $(document).ready(function(){
         
         list.push( '<li>All Documents:</li>' );
 
-        // For every item in docs
-        for( var i in docs ){
-          list.push( '<li class="' + docs[i].id + ' none"><span class="delete"><a class="' + docs[i].id + '" href="#" title="Delete ' + docs[i].title + '" >' );
+        // For every item in docs.docs ( non-exported documents )
+        for( var i in docs.docs ){
+          list.push( '<li class="' + docs.docs[i].id + ' none"><span class="delete"><a class="' + docs.docs[i].id + '" href="#" title="Delete ' + docs.docs[i].title + '" >' );
           list.push( '<img src="' + baseUrl + 'resources/imgs/delete.png" alt="Delete" /></a></span>' );
-          list.push( '<a class="load" id="' + docs[i].id + '" href="#" title="' + docs[i].title + '"><span class="doc-title">' + docs[i].title + '</span>' );
-          list.push( ' <span class="timestamp">' + docs[i].last_edited + '</span></a></li>' );
+          list.push( '<a class="load" id="' + docs.docs[i].id + '" href="#" title="' + docs.docs[i].title + '"><span class="doc-title">' + docs.docs[i].title + '</span>' );
+          list.push( ' <span class="timestamp">' + docs.docs[i].last_edited + '</span></a></li>' );
+        }
+
+        list.push( '<li>Exported Documents:</li>' );
+
+        // For every item in docs.exported_docs ( exported documents )
+        for( var i in docs.exported_docs ){
+          list.push( '<li class="' + docs.exported_docs[i].id + ' none"><span class="delete"><a class="' + docs.exported_docs[i].id + '" href="#" title="Delete ' + docs.exported_docs[i].title + '" >' );
+          list.push( '<img src="' + baseUrl + 'resources/imgs/delete.png" alt="Delete" /></a></span>' );
+          list.push( '<a class="load" id="' + docs.exported_docs[i].id + '" href="#" title="' + docs.exported_docs[i].title + '"><span class="doc-title">' + docs.exported_docs[i].title + '</span>' );
+          list.push( ' <span class="timestamp">' + docs.exported_docs[i].last_edited + '</span></a></li>' );
         }
 
         $( '#index' ).append( '<div id="all-documents"><a href="#" title="Close Window" class="close"><img src="' + baseUrl + 'resources/imgs/close.png" alt="close window" /></a><ul id="all-documents-list"></ul><div class="edit"><a href="#" title="Edit Documents">Edit</a></div></div>' );
@@ -436,4 +446,22 @@ $(document).ready(function(){
     }
   })
 
+  // Publish Document
+  $( '.publish' ).live( 'click', function() {
+    var title = $( 'input[name$=current-doc-title]' ).val();
+    var content = $( '#document' ).val();
+    var id = $( '#document' ).attr( 'class' );
+
+    $.ajax({
+      url: siteUrl + 'document/publish',
+      type: "POST",
+      data: ({ id:id, content:content, title:title }),
+      success: function (data) { 
+        var result = $.parseJSON(data);
+        console.log( result );
+        
+        window.location.replace( siteUrl + 'site/published/' + result.id );  
+      }
+    })
+  })
 }); 
