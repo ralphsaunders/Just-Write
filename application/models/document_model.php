@@ -109,8 +109,10 @@ class Document_model extends CI_Model
     if( $query )
     {
       return true;
-    } else {
-      return false; 
+    } 
+    else
+    {
+      return false;
     }
   }
 
@@ -198,15 +200,15 @@ class Document_model extends CI_Model
     }
 
     $this->db->where( 'user_id', $this->get_user_id() );
-    $this->db->order_by( 'last_edited', 'desc' );
-    $query = $this->db->get( 'exported_documents' );
+    $this->db->order_by( 'export_timestamp', 'desc' );
+    $query = $this->db->get( 'published_documents' );
 
     if( $query->num_rows() > 0 )
     {
       // Take it out of the MySQL stuff
       foreach ( $query->result() as $row )
       {
-        $documents['exported_docs'][] = $row;
+        $documents['published_docs'][] = $row;
       }
 
     }
@@ -271,18 +273,36 @@ class Document_model extends CI_Model
 
   function publish( $doc )
   {
-    // Set data
-    $store_document_insert_data = array(
-      'user_id'   => $this->get_user_id(),
-      'origin_id' => $doc['id'],
-      'title'     => $doc['title'],
-      'content'   => $doc['content']
-    );
+    $this->db->where( 'user_id', $this->get_user_id() );
+    $this->db->where( 'origin_id', $doc['id'] );
+    $query = $this->db->get( 'published_documents' );
 
-    // Insert new data
-    $insert = $this->db->insert('published_documents', $store_document_insert_data);
+    if( $query->num_rows() == 1 )
+    {
+      // Set data
+      $store_document_insert_data = array(
+        'title'     => $doc['title'],
+        'content'   => $doc['content']
+      );
 
-    // Grab data from database
+      // Update the row
+      $this->db->update('published_documents', $store_document_insert_data);
+    }
+    elseif( $query->num_rows() == 0 )
+    {
+      // Set data
+      $store_document_insert_data = array(
+        'user_id'   => $this->get_user_id(),
+        'origin_id' => $doc['id'],
+        'title'     => $doc['title'],
+        'content'   => $doc['content']
+      );
+
+      // Insert new data
+      $this->db->insert('published_documents', $store_document_insert_data);
+    }
+
+    // Grab data from table
     $this->db->where( 'user_id', $this->get_user_id() );
     $this->db->order_by( 'export_timestamp', 'desc' );
     $docs = $this->db->get( 'published_documents' );

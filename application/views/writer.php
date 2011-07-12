@@ -56,15 +56,27 @@
         <a href="#save" title="save document">Save</a>
       </span>
 
-      <span id="export">
-        <a class="markdown-to-html" href="#" title="Export to HTML"><img src="<?php echo base_url(); ?>resources/imgs/export.png" alt="Export to HTML"><span class="tool-tip">Export to HTML</span></a>
-      </span>
+      <ul id="export-options">
+        <li><a id="export-dropdown" href="#" title="Export Options"><img src="<?php echo base_url(); ?>resources/imgs/export.png" alt="Export Options"></a></li>
 
-      <span id="publish">
-        <a class="publish" href="#" title="This will make the document viewable to the public">Publish</a>
-      </span>
+        <li><div class="arrow"></div></li>
+
+        <ul id="export">
+          <li>
+            <span id="export-to-html">
+              <a class="markdown-to-html" href="#" title="Export to HTML">Export to HTML</a>
+            </span>
+          </li>
+          <li>
+            <span id="publish">
+              <a class="publish" href="#" title="This will make the document viewable to the public">Publish</a>
+            </span>
+          </li>
+        </ul>
+
+      </ul>
+
     </li>
-
   </ul>
 </nav>
 

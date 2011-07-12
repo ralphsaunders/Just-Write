@@ -406,14 +406,14 @@ $(document).ready(function(){
           list.push( ' <span class="timestamp">' + docs.docs[i].last_edited + '</span></a></li>' );
         }
 
-        list.push( '<li>Exported Documents:</li>' );
+        list.push( '<li>Published Documents:</li>' );
 
         // For every item in docs.exported_docs ( exported documents )
-        for( var i in docs.exported_docs ){
-          list.push( '<li class="' + docs.exported_docs[i].id + ' none"><span class="delete"><a class="' + docs.exported_docs[i].id + '" href="#" title="Delete ' + docs.exported_docs[i].title + '" >' );
+        for( var i in docs.published_docs ){
+          list.push( '<li class="' + docs.published_docs[i].id + ' none"><span class="delete"><a class="' + docs.published_docs[i].id + '" href="#" title="Delete ' + docs.published_docs[i].title + '" >' );
           list.push( '<img src="' + baseUrl + 'resources/imgs/delete.png" alt="Delete" /></a></span>' );
-          list.push( '<a class="load" id="' + docs.exported_docs[i].id + '" href="#" title="' + docs.exported_docs[i].title + '"><span class="doc-title">' + docs.exported_docs[i].title + '</span>' );
-          list.push( ' <span class="timestamp">' + docs.exported_docs[i].last_edited + '</span></a></li>' );
+          list.push( '<a class="load" id="' + docs.published_docs[i].id + '" href="#" title="' + docs.published_docs[i].title + '"><span class="doc-title">' + docs.published_docs[i].title + '</span>' );
+          list.push( ' <span class="timestamp">' + docs.published_docs[i].export_timestamp + '</span></a></li>' );
         }
 
         $( '#index' ).append( '<div id="all-documents"><a href="#" title="Close Window" class="close"><img src="' + baseUrl + 'resources/imgs/close.png" alt="close window" /></a><ul id="all-documents-list"></ul><div class="edit"><a href="#" title="Edit Documents">Edit</a></div></div>' );
@@ -458,10 +458,13 @@ $(document).ready(function(){
       data: ({ id:id, content:content, title:title }),
       success: function (data) { 
         var result = $.parseJSON(data);
-        console.log( result );
-        
         window.location.replace( siteUrl + 'site/published/' + result.id );  
       }
     })
   })
+
+  $( '#export-dropdown, #export a' ).live( 'click', function() {
+    $( '#export, .arrow' ).toggle();
+  })
+
 }); 
