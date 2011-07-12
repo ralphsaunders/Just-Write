@@ -405,16 +405,21 @@ $(document).ready(function(){
           list.push( '<a class="load" id="' + docs.docs[i].id + '" href="#" title="' + docs.docs[i].title + '"><span class="doc-title">' + docs.docs[i].title + '</span>' );
           list.push( ' <span class="timestamp">' + docs.docs[i].last_edited + '</span></a></li>' );
         }
-
+        
+        /*
+         * Commented out until I tweak the delete & load functions
         list.push( '<li>Published Documents:</li>' );
 
         // For every item in docs.exported_docs ( exported documents )
+        
         for( var i in docs.published_docs ){
           list.push( '<li class="' + docs.published_docs[i].id + ' none"><span class="delete"><a class="' + docs.published_docs[i].id + '" href="#" title="Delete ' + docs.published_docs[i].title + '" >' );
           list.push( '<img src="' + baseUrl + 'resources/imgs/delete.png" alt="Delete" /></a></span>' );
           list.push( '<a class="load" id="' + docs.published_docs[i].id + '" href="#" title="' + docs.published_docs[i].title + '"><span class="doc-title">' + docs.published_docs[i].title + '</span>' );
           list.push( ' <span class="timestamp">' + docs.published_docs[i].export_timestamp + '</span></a></li>' );
         }
+
+        */
 
         $( '#index' ).append( '<div id="all-documents"><a href="#" title="Close Window" class="close"><img src="' + baseUrl + 'resources/imgs/close.png" alt="close window" /></a><ul id="all-documents-list"></ul><div class="edit"><a href="#" title="Edit Documents">Edit</a></div></div>' );
         

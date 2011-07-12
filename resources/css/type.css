@@ -26,18 +26,20 @@ ol, ul { margin-bottom:1em; }
 .generic-document { font:1.143em/1.857em Georgia, serif; }
 
 /* | Headings */
-h1, h2, h3, h4, h5 { font-weight:bold; }
+h1, h5 { font-weight:bold; }
 
 h1 { font:bold 1.5em/1.875em Helvetica, Arial, 'sans-serif'; letter-spacing:-1px; }
-h2 { font-size:1.375em; line-height:1.75em; }
+h2 { font-size:1.3em; line-height:1.75em; }
 h3 { font-size:1.25em; line-height:1.625em; }
 h4 { font-size:1.125em; line-height:1.5em; }
-h5 { font-size:1em; line-height:1.313em; font-style:italic; }
+h5 { font-size:1em; line-height:1.313em; }
 h6 { font:bold italic 0.875em/1.188em Georgia, 'serif'; }
 
 /* | Links */
 a { font-weight:bold; text-decoration:none; color:#B5B5B5; }
 a:hover { color:#666666; }
+#published-document a { font-weight:normal; color:#9C9C9C; }
+#published-document a:hover { color:#6E6E6E; border-bottom:1px dotted #FA9005; }
 
 /* - Specific Styles */
 

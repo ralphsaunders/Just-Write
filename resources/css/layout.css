@@ -80,7 +80,10 @@
 #about-just-write { clear:both; margin-top:40px; }
 
 /* | Published Document */
-#published-document { background-color:#F5F4F2; }
+#published-document { background-color:#FAFAFA; }
+#published-document img { max-width:100%; height:auto; }
+/*   |- Footer */
+#published-document .generic-meta a { font-weight:bold; }
 .back-to-editor { width:650px; margin:0 auto; margin-bottom:1em; }
 
 /* | Control bar for writer view */
