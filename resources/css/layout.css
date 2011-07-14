@@ -33,10 +33,10 @@
   text-decoration:none;
   background-color:#7C7C7C;
   background:-webkit-gradient(linear, left top, left bottom, from(#7c7c7c), to(#6c6c6c));
-  margin-top:1em; }
+  margin-top:1em; 
 }
 .generic-form input[type="submit"]:hover {
-  background-color:#3C9FE6;
+  background:#3C9FE6;
   background: -webkit-gradient(linear, left top, left bottom, from(#3C9FE6), to(#2A87C9));
   border-top: 1px solid #48AEF7;
   border-bottom: 1px solid #2581C2;

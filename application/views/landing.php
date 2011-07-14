@@ -157,7 +157,7 @@
 
           $ios = array(
             'title'   => 'Official iOS Support',
-            'content' => 'In theory, Just Write should work fine on iOS devices right now, however we\'re yet to fully test on these devices. If you feel adventurous, give it ago and <a href="http://twitter.com/justwrite" title="Just Write on Twitter">let us know how it goes on twitter</a>.',
+            'content' => 'In theory, Just Write should work fine on iOS devices right now, however we\'re yet to fully test on these devices. If you feel adventurous, give it ago and <a href="http://twitter.com/justwriteapp" title="Just Write on Twitter">let us know how it goes on twitter</a>.',
             'img'     => 'ios'
           );
           
