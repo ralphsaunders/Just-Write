@@ -337,7 +337,6 @@ $(document).ready(function(){
           data: ({ id:id, content:content, title:title }),
           success: function (data) { 
             var result = $.parseJSON(data);
-            console.log( result );
             
             $( '#document-container' ).attr( 'class', 'exported' );
 
