@@ -11,6 +11,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/style.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>resources/css/jquery.fancybox-1.3.4.css" type="text/css" media="screen">
 
   <!-- jQuery; other scripts are located at the bottom of the page -->
   <script src="<?php echo base_url(); ?>resources/js/jquery-1.6.1.min.js" type="text/javascript"></script>

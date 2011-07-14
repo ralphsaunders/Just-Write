@@ -4,21 +4,24 @@ $(document).ready(function(){
   var siteUrl = 'http://localhost/24hr-writing-webapp/index.php/';
   var baseUrl = 'http://localhost/24hr-writing-webapp/';
 
+  function inputPrep() {
+    // Hides input value on focus
+    $( 'input:text, input:password' ).each(function() {
+      var default_value = this.value;
+      $(this).focus(function() {
+        if(this.value == default_value) {
+          this.value = '';
+        }
+      });
+      $(this).blur(function() {
+        if(this.value == '') {
+          this.value = default_value;
+        }
+      });
+    });
+  }
 
-  // Hides input value on focus
-  $( 'input:text, input:password' ).each(function() {
-    var default_value = this.value;
-    $(this).focus(function() {
-      if(this.value == default_value) {
-        this.value = '';
-      }
-    });
-    $(this).blur(function() {
-      if(this.value == '') {
-        this.value = default_value;
-      }
-    });
-  });
+  inputPrep();
 
   // Sets widths + heights for the navigation and document 
   var currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
@@ -332,7 +335,6 @@ $(document).ready(function(){
           url: siteUrl + 'document/markdown_to_html',
           type: "POST",
           data: ({ id:id, content:content, title:title }),
-          async: false,
           success: function (data) { 
             var result = $.parseJSON(data);
             console.log( result );
@@ -432,8 +434,12 @@ $(document).ready(function(){
   }
 
   $( '.close' ).live( 'click', function() {
-    $( '#all-documents' ).fadeToggle( function() {
-      $( this ).remove();
+    $( this ).parent().fadeToggle( function() {
+      if( $( this ).parent().attr( "id" ) == 'login-form-wrap' ) {
+        $( this ).parent().remove()
+      } else {
+        $( this ).remove();
+      }
     })
     return false;
   })
@@ -471,5 +477,37 @@ $(document).ready(function(){
   $( '#export-dropdown, #export a' ).live( 'click', function() {
     $( '#export, .arrow' ).toggle();
   })
+
+  $( '#login' ).live( 'click', function() {
+    if( $( '#login-form-wrap' ).length == 0 ){
+      var form = new Array();
+
+      // Setup wrappers
+      form.push( '<div id="login-form-wrap"><div id="login-form" class="generic-form">' );
+      // Start close link
+      form.push( '<a href="" title="Close Window" class="close">' );
+      // finish link + h2
+      form.push( '<img src="' + baseUrl + 'resources/imgs/close.png" alt="close window" /></a>');
+      // Just Write Logo
+      form.push( '<img src="' + baseUrl + 'resources/images/just-write-logo.png" alt="The Just Write Logo" />' );
+      // H2
+      // form.push( '<h2>Login to Write</h2>' );
+      // Start form
+      form.push( '<form action="' + siteUrl + 'session/validate_credentials" method="post" accept-charset="utf-8">');
+      // Fields
+      form.push( '<label>Username:<br><input type="text" name="username" value="Username"></label>' );
+      form.push( '<label>Password:<br><input type="password" name="password" value="Password"></label>' );
+      form.push( '<input type="submit" name="submit" value="Login"></form></div></div>' );
+
+      $( '#index' ).append( form.join('') );
+      $( '#login-form-wrap' ).hide();
+      $( '#login-form-wrap' ).fadeIn( 300 );
+      
+      inputPrep();
+
+      $( 'input[name$=username]' ).focus();
+    } 
+    return false;
+  }) 
 
 }); 

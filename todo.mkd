@@ -3,19 +3,13 @@
 - When you hit delete, it should show a confirm button; we all misclick sometimes.
 - Change .live( 'click', function() { ... } ); to .delegate() or w/e ( faster )
 - Consistent shortcuts
-- Sort out character encoding - it's broken
 - Redo salts ( every user should have a unique random salt in the DB )
 - Save current document when user logs out.
-- Hide main menu + logout button when the mouse has stopped moving/the title input isn’t in focus.
-- Sharing/publishing to URL?
 
 ## Suggestions from [Mattieu Dufour](http://www.matthieudufour.com/ "He's awesome")
 
 - After saving the document, disable the save button until the document is modified. 
 - The current document should be saved automatically when the user switches documents.
-- Increase the width of the document title area.
-- The logout button shouldn't be touching the scrollbar. 
-- Export to HTML should generate a new *page* with the text highlighted.
 - Documents should fade in and out when they're loaded.
 
 ## Suggestions from [Kevin Rocco Diale](http://kroccodiale.com "He's Awesome too")

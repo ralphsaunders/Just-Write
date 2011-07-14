@@ -27,6 +27,7 @@ class Member extends CI_Controller {
       if($query = $this->membership_model->create_member()){
         $data['title'] = 'Write Web App';
         $data['main_content'] = 'landing';
+        $data['confirmation'] = "Your account was created, you can now login";
         $this->load->view('includes/template', $data);
       } else {
         $error = 'Username or Email is already taken';
@@ -39,7 +40,7 @@ class Member extends CI_Controller {
   }
 
   function apply_for_invitation()
-  // Not being used, but I'll leave it here incase I run into scaling issues
+    // Not hooked up to anything, but I'll leave it here incase I run into scaling issues
   {
     $email = $this->input->post('address');
     

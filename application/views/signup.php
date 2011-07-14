@@ -21,8 +21,12 @@
       <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
     </form>
-    
-    <p>Already have an account? <?php echo anchor('session', 'Login'); // anchor(uri segments, text, attributes); ?></p>
+
+    <p>Got an account? 
+      <a id="login" href="" title="Login to write">
+        <img src="<?php echo base_url(); ?>resources/imgs/log-in.png" alt="->" />Login
+      </a>
+    </p>
   </div>
 
 </section>

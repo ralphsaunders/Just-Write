@@ -18,7 +18,6 @@
   display:block;
   padding:5px 10px;
   width:380px;
-  margin-bottom:1em;
   border-radius:5px;
   border:1px solid #B5B5B5;
 }
@@ -34,6 +33,7 @@
   text-decoration:none;
   background-color:#7C7C7C;
   background:-webkit-gradient(linear, left top, left bottom, from(#7c7c7c), to(#6c6c6c));
+  margin-top:1em; }
 }
 .generic-form input[type="submit"]:hover {
   background-color:#3C9FE6;
@@ -42,7 +42,15 @@
   border-bottom: 1px solid #2581C2;
   cursor:pointer;
 }
+.generic-form form { text-align:left; }
+.generic-form label { margin-top:1em; display:block; }
 
+/* | Generic Navigation */
+.generic-menu-heading { display:block; margin-bottom:0.5em; }
+
+/* |- Generic Expand */
+.generic-expand { position:relative; }
+.generic-expand img { position:absolute; box-shadow:none!important; left:140px; top:-10px; } 
 /* | Generic Document */
 .generic-document { width:650px; margin:0 auto; padding:2em 0; }
 
@@ -68,16 +76,89 @@
 */
 }
 
+/* | Call to action */
+.call-to-action-nav { text-align:center; }
+.call-to-action { 
+  background:#fff;
+  background:-webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#F5F5F5)); 
+  box-shadow:0 2px 10px #DBDBDB;
+  color:#3B3B3B;
+  padding:10px 30px;
+  border-radius:5px;
+  text-shadow:1px 1px #fff;
+  display:inline-block;
+}
+.call-to-action:hover { color:#000000; box-shadow:0 2px 10px #CFCFCF; }
+.call-to-action:active { position:relative; vertical-align:-1px; }
+
+/*  |- Modified Call to actions */
+.call-to-action.small { padding:5px 20px; }
+.call-to-action.twitter { 
+  background:#B0B0B0;
+  background:-webkit-gradient(linear, left top, left bottom, from(#DEDEDE), to(#B0B0B0)); 
+  text-shadow:1px 1px #DEDEDE;
+}
+.call-to-action.twitter:hover { text-shadow:1px 1px #E6E6E6; }
+
+/* |- Thumbs with buttons under them */
+.thumb-button { width:178px; }
+.thumb-button img { margin-bottom:1em!important; }
+
 /* - Specific Styles */
 
 /* | Body of page */
-#index { position:relative; }
+#index { position:relative; background:#F7F7F7; }
 
 /* | Landing page */
-.container { width:400px; margin:0 auto; margin-top:50px; }
+#container { width:960px; margin:0 auto; position:relative; }
+#container .generic-section { margin-bottom:40px; border-bottom:1px dashed #000; clear:both; }
+#why, #source { width:47%; float:left; margin-bottom:40px; }
+#why img, #source img { border-radius:10px; box-shadow:0 2px 10px #DBDBDB; }
 
-/* | About Just Write */
-#about-just-write { clear:both; margin-top:40px; }
+/*   |- List items */
+#container .generic-section li { margin-bottom;1em; list-style:none; max-width:47%; float:left; margin-bottom:2em; }
+#container .generic-section .odd { margin-right:6%; }
+#container .generic-section img { float:left; margin:0 2em 2em 0; }
+#container .generic-section li img { border-radius:10px; box-shadow:0 2px 10px #DBDBDB; }
+
+/*   |- Navigation */
+#container .generic-nav { padding:10px 0; overflow:hidden; }
+
+/*      |- Quick Nav */
+#quick-navigation { position:relative; }
+#quick-navigation ul { background-color:#fff; }
+#quick-navigation ul li { display:block; float:left; width:33.3%; }
+#quick-navigation a { display:block; background:#fff; padding:6.2% 8%; }
+#quick-navigation a:hover { background:#F2F2F2; }
+
+/*         |- Arrows */
+.quick-nav-arrow { width:0; height:0; border-width:59px 30px 58px 30px; border-style:solid; position:absolute; } 
+.quick-nav-arrow.left { left:-60px; border-color:#fff #fff #fff transparent; }
+.quick-nav-arrow.right { right:-60px; border-color:#fff transparent #fff #fff; }
+
+/*   |- Introduction */
+#introduction { border-top:4px solid #000; padding-top:20px; overflow:hidden; }
+#write-your-own { margin:0.5em 0; border:none; background:transparent; width:480px; height:200px; resize:none; }
+#write-your-own:focus { outline:none; }
+#introduction .call-to-action.twitter { margin-left:30px; }
+#introduction div { width:480px; }
+#ui-screenshot { width:480px; }
+
+/*   |- What Does Just Write do? */
+#what { margin-top:40px; }
+
+/*   |- Login Form */
+#login-form-wrap { position:relative; z-index:1; }
+#login-form { text-align:center; width:400px; background:#000; background:rgba( 0, 0, 0, 0.7 ); padding:40px; position:fixed; top:50%; left:50%; margin-top:-147px; margin-left:-200px; border-radius:5px; color:#fff; }
+#login-form input { border:none; }
+#login-form .close img { background-color:#6B6B6B; }
+#login-form .close img:hover { background-color:#3c9fe6; }
+
+/* | Why Does it Exist? */
+#why { margin-right:6%; }
+
+/* | Landing Page's Footer */
+#landing-footer { background-color:#262626; color:#fff; padding:20px; border-top:5px solid #3B3B3B; text-align:center; }
 
 /* | Published Document */
 #published-document { background-color:#FAFAFA; }
@@ -185,7 +266,7 @@
   right:34px;
   top:60px;
   min-width:150px;
-  background-color:red; 
+  background-color:#4F4F4F; 
   padding:5px;
   border-radius:5px 0 5px 5px;
   background:-webkit-gradient(linear, left top, left bottom, from(#4F4F4F), to(#404040));
@@ -223,9 +304,10 @@
 #document:focus { outline:none; }
 
 
-/* | Logout */
+/* | Logout/login */
 #logout { position:absolute; bottom:20px; right:20px; }
-#logout img { vertical-align:-3px; margin-right:10px; }
+#logout a { display:block; }
+#logout img, #login img { vertical-align:-3px; margin-right:10px; }
 
 /* | All Documents List */
 #all-documents {
