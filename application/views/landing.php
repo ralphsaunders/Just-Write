@@ -215,7 +215,7 @@
 <footer id="landing-footer">
   <img src="<?php echo base_url() . 'resources/images/just-write-logo.png'; ?>" alt="The Just Write Logo" />
   <p>Created and maintained by Ralph Saunders, <a href="http://twitter.com/ralphsaunders" title="@ralphsaunders (Ralph Saunders) on Twitter">follow him on twitter</a>.</p>
-  <small><a href="http://write.ralphsaunders.co.uk/index.php/site/published/36" >Privacy Policy</a></small>
+  <small><a href="http://write.ralphsaunders.co.uk/index.php/site/published/45" >Privacy Policy</a></small>
 </footer>
 
 <!-- Page Specific Scripts -->

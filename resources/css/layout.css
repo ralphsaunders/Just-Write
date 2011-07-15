@@ -334,6 +334,9 @@
 div.edit { margin-top:20px; }
 .timestamp { float:right; margin-right:20px; }
 
+/* | Ads */
+.ad { width:120px; position:absolute; top:50%; left:40px; }
+
 /* Mobile Styles */
 @media only screen and (max-width : 480px) {
 

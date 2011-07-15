@@ -48,8 +48,8 @@ h6 { font:bold italic 0.875em/1.188em Georgia, 'serif'; }
 /* | Links */
 a { font-weight:bold; text-decoration:none; color:#B5B5B5; }
 a:hover { color:#666666; }
-#published-document a { font-weight:normal; color:#9C9C9C; }
-#published-document a:hover { color:#6E6E6E; border-bottom:1px dotted #FA9005; }
+#published-document a { font-weight:normal; color:#8A8A8A; }
+#published-document a:hover { color:#6E6E6E; border-bottom:1px dashed #FA9005; }
 
 /* - Specific Styles */
 
@@ -89,6 +89,10 @@ a:hover { color:#666666; }
 .timestamp { color:#D1D1D1; }
 a:hover .timestamp { color:#666666; }
 #all-documents li a:hover { color:#61A0E8; }
+
+/* | Ads */
+.ad { font:0.714em/1.5em verdana, sans-serif; }
+.ad a { font-weight:bold!important; }
 
 /* | Mobile Styles */
 @media only screen and (max-width : 480px) {

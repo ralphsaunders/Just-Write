@@ -281,11 +281,16 @@ class Document_model extends CI_Model
     {
       // Set data
       $store_document_insert_data = array(
+        'user_id'   => $this->get_user_id(),
+        'username'  => $this->session->userdata('username'),
+        'origin_id' => $doc['id'],
         'title'     => $doc['title'],
         'content'   => $doc['content']
       );
 
       // Update the row
+      $this->db->where( 'user_id', $this->get_user_id() );
+      $this->db->where( 'origin_id', $doc['id'] );
       $this->db->update('published_documents', $store_document_insert_data);
     }
     elseif( $query->num_rows() == 0 )
@@ -293,6 +298,7 @@ class Document_model extends CI_Model
       // Set data
       $store_document_insert_data = array(
         'user_id'   => $this->get_user_id(),
+        'username'  => $this->session->userdata('username'),
         'origin_id' => $doc['id'],
         'title'     => $doc['title'],
         'content'   => $doc['content']
