@@ -26,7 +26,7 @@ $config['base_url']	= 'http://localhost/24hr-writing-webapp/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------

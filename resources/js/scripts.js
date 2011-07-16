@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   // Set global variables
-  var siteUrl = 'http://localhost/24hr-writing-webapp/index.php/';
+  var siteUrl = 'http://localhost/24hr-writing-webapp/';
   var baseUrl = 'http://localhost/24hr-writing-webapp/';
 
   function inputPrep() {
