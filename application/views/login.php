@@ -8,8 +8,8 @@
       echo form_password('password', 'Password');
       
       echo form_submit('submit', 'Login');
-
-      echo validation_errors('<p class="error">'); 
+      
+      echo anchor( 'member/forgot_password', 'Forgot Password', 'class="left"' );
     ?>
     </form>
     <?php if( isset( $error ) ): ?>

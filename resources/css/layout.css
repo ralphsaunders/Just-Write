@@ -44,7 +44,7 @@
 }
 .generic-form form { text-align:left; }
 .generic-form label { margin-top:1em; display:block; }
-
+.generic-form p, .generic-form a { margin-top:1em; display:block; }
 /* | Generic Navigation */
 .generic-menu-heading { display:block; margin-bottom:0.5em; }
 

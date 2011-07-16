@@ -310,15 +310,16 @@ class Document_model extends CI_Model
 
     // Grab data from table
     $this->db->where( 'user_id', $this->get_user_id() );
-    $this->db->order_by( 'export_timestamp', 'desc' );
+    $this->db->where( 'origin_id', $doc['id'] );
     $docs = $this->db->get( 'published_documents' );
 
-    if( $docs->num_rows() > 0 )
+    if( $docs->num_rows()  == 1 )
     {
-      foreach( $docs->result() as $doc )
+      foreach ( $docs->result() as $doc )
       {
-        $results[] = $doc; 
+        $results[] = $doc;
       }
+
       return $results;
     } 
     else 

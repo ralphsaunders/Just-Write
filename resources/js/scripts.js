@@ -496,7 +496,11 @@ $(document).ready(function(){
       // Fields
       form.push( '<label>Username:<br><input type="text" name="username" value="Username"></label>' );
       form.push( '<label>Password:<br><input type="password" name="password" value="Password"></label>' );
-      form.push( '<input type="submit" name="submit" value="Login"></form></div></div>' );
+      form.push( '<input type="submit" name="submit" value="Login">' );
+      // Forgot password link
+      form.push( '<a href="' + siteUrl + 'member/forgot_password" title="Trouble remembering your password?">Forgot Password</a>' );
+      // Close form and wrappers
+      form.push( '</form></div></div>' );
 
       $( '#index' ).append( form.join('') );
       $( '#login-form-wrap' ).hide();
