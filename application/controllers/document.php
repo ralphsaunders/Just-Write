@@ -133,15 +133,17 @@ class Document extends CI_Controller {
       $this->load->helper( 'markdown' );
       $doc = array(
         'id'      => $_POST['id'],
-        'title'   => $title,
+        'title'   => '<h1>' . $title . '</h1>',
         'content' => markdown( $content )
       );
 
       $this->load->model( 'document_model' );
       if( $query = $this->document_model->new_html_doc( $doc ) )
       {
-        $doc['id'] = $query[0];
-        echo json_encode( $doc );
+        $exported_doc = $doc; 
+        $exported_doc['title']   = htmlspecialchars( $exported_doc['title'] );
+        $exported_doc['content'] = htmlspecialchars( $exported_doc['content'] );
+        echo json_encode( $exported_doc );
       }
 
     }

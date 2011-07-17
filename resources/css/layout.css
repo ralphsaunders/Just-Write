@@ -51,8 +51,21 @@
 /* |- Generic Expand */
 .generic-expand { position:relative; }
 .generic-expand img { position:absolute; box-shadow:none!important; left:140px; top:-10px; } 
+
 /* | Generic Document */
 .generic-document { width:650px; margin:0 auto; padding:2em 0; }
+
+/* | Generic Code (shows up on export) */
+.generic-code { 
+  width: 90%;
+  word-wrap:break-word;
+  margin: 0 auto;
+  border: none;
+  display: block;
+  background: transparent;
+  padding: 0 30px;
+  overflow-y:scroll; 
+}
 
 /*   |- Meta */
 .generic-meta { width:650px; margin:0 auto; padding:1em 0; border-top:1px dashed #CCCCCC; }
@@ -184,7 +197,7 @@
 
 /* |- Document controls */
 #doc-controls, #current-doc-controls { margin-top:4px; }
-#doc-controls { float:left; }
+#doc-controls { float:left; height:25px; }
 #current-doc-controls { float:right; }
 #doc-link { position:relative; }
 #doc-link img { vertical-align:-4px; margin-right:20px; } 

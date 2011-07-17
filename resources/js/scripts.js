@@ -26,11 +26,13 @@ $(document).ready(function(){
   // Sets widths + heights for the navigation and document 
   var currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
   $( '#document' ).height( $( window ).height() - 120 );
+  $( '.generic-code' ).height( $( window ).height() - 120 );
 
   // When window is resized update heights + widths
   $( window ).resize( function() {
     currentWidth = $( '#control-bar' ).width( $( window ).width() - 73 );
     $( '#document' ).height( $( window ).height() - 120 );
+    $( '.generic-code' ).height( $( window ).height() - 120 );
   })
 
   // Hides message on signup form
@@ -316,56 +318,56 @@ $(document).ready(function(){
     $( '#control-bar, #document' ).animate({
       opacity: 0 
     }, 200, function(){
+      $( '#document' ).hide();
+
       var markdownNav = new Array();
 
       markdownNav.push( '<li id="doc-controls"><span id="back" class="button"><a href="#" id="back-to-document" title="Back to Document">Back' );
       markdownNav.push( '</a></span></li>' );
       
-      markdownNav.push ( '<li id="title"><input name="current-doc-title" value="' + title + ' ( HTML export )" tabindex="1"></li>' );
-
       $( '#control-bar' ).html( markdownNav.join( '' ) );
 
       $( '#control-bar' ).animate({
         opacity: 1
       }, 200, function(){
         $( '#index' ).removeAttr( 'class' );
-    
-    
-        $.ajax({
-          url: siteUrl + 'document/markdown_to_html',
-          type: "POST",
-          data: ({ id:id, content:content, title:title }),
-          success: function (data) { 
-            var result = $.parseJSON(data);
-            
-            $( '#document-container' ).attr( 'class', 'exported' );
-
-            $( '#document' ).val( result.content );
-
-            $( '#document' ).animate({
-              opacity: 1
-            }, 200, function(){
-              // Animation complete 
-            })
-
-            // $( '#document' ).attr( 'class', result );
-            // Populate textarea with html and select said html,
-            // ready for copy/paste.
-            
-          }
-        })
-
       })
+    }) 
+    
+    $.ajax({
+      url: siteUrl + 'document/markdown_to_html',
+      type: "POST",
+      data: ({ id:id, content:content, title:title }),
+      async: false,
+      success: function (data) { 
+        var result = $.parseJSON(data);
+        console.log( result );
+        
+        $( '#document-container' ).attr( 'class', 'exported' );
+        
+        var code = new Array();
+        code.push( '<article><pre><code class="generic-code"></code></pre></article>' );
+        
+        $( '#document-container' ).append( code.join('') );
+        $( '.generic-code' ).hide().html( result.title + '\n\n' );
+        $( '.generic-code' ).append( result.content );
+        
+        // Set height and fade in
+        $( '.generic-code' ).height( $( window ).height() - 120 );
+        $( '.generic-code' ).fadeIn( 200 );
+        
+      }
     })
 
     $( '#back-to-document' ).live( 'click', function() {
-      $( '#control-bar, #document' ).animate({
+      $( '#control-bar, .generic-code' ).animate({
         opacity: 0
       }, 200, function() {
         $( '#control-bar' ).html( normalNav ).animate({
           opacity: 1
         }, 200, function() {
-          $( '#document' ).val( content );
+          $( '#document' ).val( content ).show();
+          $( '.generic-code' ).parent().parent().remove();
           $( '#logout, #document' ).animate({
             opacity:1
           }, 200, function(){

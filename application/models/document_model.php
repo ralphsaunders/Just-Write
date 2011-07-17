@@ -260,9 +260,9 @@ class Document_model extends CI_Model
 
     if( $docs->num_rows() > 0 )
     {
-      foreach( $docs->result() as $id )
+      foreach( $docs->result() as $doc )
       {
-        $results[] = $id->id;
+        $results[] = $doc;
       }
 
       return $results;
