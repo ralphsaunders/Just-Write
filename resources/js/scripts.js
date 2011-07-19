@@ -266,6 +266,8 @@ $(document).ready(function(){
 
   // Resets input fields - database will then create new document when it's saved
   $( 'a[href$=new-document]' ).live( 'click', function() {
+      
+    saveDocument();
     
     // Reset document fields
     $( 'input[name$=current-doc-title]' ).val( 'Untitled Document' );
