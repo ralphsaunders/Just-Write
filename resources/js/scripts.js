@@ -1,8 +1,15 @@
 $(document).ready(function(){
 
   // Set global variables
-  var siteUrl = 'http://localhost/24hr-writing-webapp/';
-  var baseUrl = 'http://localhost/24hr-writing-webapp/';
+  var local = true;
+
+  if( local == true ) {
+    var siteUrl = 'http://localhost/24hr-writing-webapp/';
+    var baseUrl = 'http://localhost/24hr-writing-webapp/';
+  } else {
+    var siteUrl = 'http://write.ralphsaunders.co.uk/';
+    var baseUrl = 'http://write.ralphsaunders.co.uk/';
+  }
 
   function inputPrep() {
     // Hides input value on focus
@@ -212,7 +219,7 @@ $(document).ready(function(){
       async: false,
       success: function (data) { 
         var result = $.parseJSON(data);
-
+      
         $( '#document' ).attr( 'class', result );
 
         $( '#saving-icon' ).fadeOut( 300 );
@@ -221,6 +228,11 @@ $(document).ready(function(){
             $( '.delete a' ).hide();
           })
         })
+
+        // Google Analytics 
+        // _trackEvent(category, action, opt_label, opt_value)
+        _gaq.push(['_trackEvent', 'Doc', 'Saved', '/document/save' + result ]);
+
       }
     })
   }
@@ -258,6 +270,11 @@ $(document).ready(function(){
         refreshDocuments( function() {
           $( '.delete a' ).hide();
         })
+
+        // Google Analytics 
+        // _trackEvent(category, action, opt_label, opt_value)
+        _gaq.push(['_trackEvent', 'Doc', 'Loaded', '/document/' + doc.id ]);
+
       }
     })
 
@@ -273,6 +290,11 @@ $(document).ready(function(){
     $( 'input[name$=current-doc-title]' ).val( 'Untitled Document' );
     $( '#document' ).val( '' ).focus();
     $( '#document' ).attr( 'class', '' );
+
+    // Google Analytics 
+    // _trackEvent(category, action, opt_label, opt_value)
+    _gaq.push(['_trackEvent', 'Doc', 'Created', '/document/' ]);
+
     return false;
   })
 
@@ -302,6 +324,10 @@ $(document).ready(function(){
         success: function (data) {
           // No need to refresh the document list as the item has already been hidden from view
           // and removed from the database.
+          
+          // Google Analytics 
+          // _trackEvent(category, action, opt_label, opt_value)
+          _gaq.push(['_trackEvent', 'Doc', 'Deleted', '/document/delete_document/' + id ]);
         }
       })
     })
@@ -343,7 +369,6 @@ $(document).ready(function(){
       async: false,
       success: function (data) { 
         var result = $.parseJSON(data);
-        console.log( result );
         
         $( '#document-container' ).attr( 'class', 'exported' );
         
@@ -357,6 +382,10 @@ $(document).ready(function(){
         // Set height and fade in
         $( '.generic-code' ).height( $( window ).height() - 120 );
         $( '.generic-code' ).fadeIn( 200 );
+
+        // Google Analytics 
+        // _trackEvent(category, action, opt_label, opt_value)
+        _gaq.push(['_trackEvent', 'Doc', 'Exported', '/document/markdown_to_html/' + result.id ]);
         
       }
     })
@@ -470,8 +499,13 @@ $(document).ready(function(){
       url: siteUrl + 'document/publish',
       type: "POST",
       data: ({ id:id, content:content, title:title }),
-      success: function (data) { 
+      success: function (data) {
         var result = $.parseJSON(data);
+
+        // Google Analytics 
+        // _trackEvent(category, action, opt_label, opt_value)
+        _gaq.push(['_trackEvent', 'Doc', 'Published', '/document/publish/' + result.id ]);
+        
         window.location.replace( siteUrl + 'site/published/' + result.id );  
       }
     })
