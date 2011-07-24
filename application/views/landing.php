@@ -16,7 +16,7 @@
     <article id="introduction">
       <aside id="ui-screenshot" class="left">
         <a href="<?php echo base_url(); ?>" title="Homebound">
-          <img src="<?php echo base_url() . 'resources/images/ui-screenshot.png' ; ?>" alt="The Just Write Interface" />
+          <img src="<?php echo base_url() . 'resources/images/ui-screenshot.png' ; ?>" alt="The Just Write Interface" height="300" width="450" />
         </a>
       </aside>
       <div class="right">        

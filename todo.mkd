@@ -15,6 +15,5 @@
 ## Suggestions from [Kevin Rocco Diale](http://kroccodiale.com "He's Awesome too")
 
 - Mobile Stylesheet, for quick note taking.
-- Forgot password function.
 - Confirmation of password on signup ( double field ).
 - oAuth ( two click ) signup. Would be useful for sharing of documents too. Twitter first. [Twitter Library CI](https://github.com/elliothaughin/codeigniter-twitter "SWEEET!").

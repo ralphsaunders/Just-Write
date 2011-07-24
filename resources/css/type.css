@@ -18,6 +18,7 @@ em { font-style:italic; }
 strong { font-weight:bold; }
 ol, ul { margin-bottom:1em; }
 small { font:0.643em/1em verdana, sans-serif; }
+code, pre { font-family:'courier new', monospace; }
 
 /* - Generic Styles */
 

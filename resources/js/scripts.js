@@ -551,4 +551,29 @@ $(document).ready(function(){
     return false;
   }) 
 
+  // Settings Menu
+  $( '#settings-menu' ).live( 'click', function() {
+    if( $( '#settings-wrap' ).length == 0 ){
+      // Wrappers
+      var wrappers = new Array();
+      wrappers.push( '<div id="settings-wrap-wrap"><div id="settings-wrap"><h1>Settings</h1><ul id="settings"></ul></div></div>');
+
+      // Settings
+      var settings = new Array();
+
+      // Theme Settings
+      settings.push( '<li><input type="radio" name="theme" value="Dark Theme" /><label for="theme"> Dark Theme</label></li>' );
+
+      $( '#index' ).append( wrappers.join('') );
+      $( '#settings-wrap' ).hide();
+      $( '#settings' ).append( settings.join('') );
+      
+      $( '#settings-wrap' ).fadeIn( 300 );
+
+    }
+
+    return false;
+
+  })
+
 }); 

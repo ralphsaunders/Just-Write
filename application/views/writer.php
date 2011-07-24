@@ -87,10 +87,18 @@
   $logged_in = $this->session->userdata('is_logged_in');
   if( isset($logged_in) ):
 ?>
-<nav id="logout">
-
-  <a href="<?php echo site_url( 'session/destroy' ); ?>" title="Logout">
-    <img src="<?php echo base_url(); ?>resources/imgs/log-out.png" alt="Logout" />Logout
-  </a>
+<nav id="app-controls">
+  <ul>
+    <li class="left">
+      <a href="" title="Settings" id="settings-menu">
+        <img src="<?php echo base_url(); ?>resources/imgs/settings.png" alt="settings" />Settings
+      </a>
+    </li> 
+    <li class="right">
+      <a href="<?php echo site_url( 'session/destroy' ); ?>" title="Logout">
+        <img src="<?php echo base_url(); ?>resources/imgs/log-out.png" alt="Logout" />Logout
+      </a>
+    </li>
+  </ul>
 </nav>
 <?php endif; ?>
