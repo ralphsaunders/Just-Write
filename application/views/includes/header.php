@@ -37,6 +37,17 @@
 
   </script>
 </head>
-<body id="index">
+<?php
+  
+  if( isset( $settings ) )
+  {
+    if( $settings->theme == 1 )
+    {
+      $class = 'class="dark"';
+    }
+  }
+
+?>
+<body id="index" <?php if( isset( $class ) ){ echo $class; } ?>>
 
 

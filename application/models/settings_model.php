@@ -34,6 +34,23 @@ class Settings_model extends CI_Model
     }
   }
 
+  function fetch_users_settings()
+  // fetches a user's settings
+  {
+    $this->db->where( 'user_id', $this->get_user_id() );
+    $query = $this->db->get( 'settings' );
+
+    if( $query->num_rows() == 1 )
+    {
+      $user = $query->row();
+      return $user;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   function change_theme()
   // Toggles theme
   {
@@ -55,7 +72,7 @@ class Settings_model extends CI_Model
       {
         $theme = array(
           'theme' => 0
-        )
+        );
       }
 
       $this->db->where( 'user_id', $this->get_user_id() );
@@ -68,6 +85,7 @@ class Settings_model extends CI_Model
       $this->create_users_settings();
       $this->change_theme();
     }
-  }  
+  }
+
 }
 ?>

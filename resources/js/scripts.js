@@ -64,7 +64,7 @@ $(document).ready(function(){
 
   // Hides the control bar unless mouse is moving
   function hideControls() {
-    $( '#main-menu, #logout' ).fadeOut( 500 );
+    // $( '#main-menu, #logout' ).fadeOut( 500 );
   }
 
   // Damn dirty hack, but it works
@@ -342,7 +342,7 @@ $(document).ready(function(){
     var id = $( '#document' ).attr( 'class' );
     var normalNav = $( '#control-bar' ).children();
 
-    $( '#index' ).attr( 'class', 'exporting' );
+    $( '#index' ).addClass( 'exporting' );
     $( '#control-bar, #document' ).animate({
       opacity: 0 
     }, 200, function(){
@@ -358,7 +358,7 @@ $(document).ready(function(){
       $( '#control-bar' ).animate({
         opacity: 1
       }, 200, function(){
-        $( '#index' ).removeAttr( 'class' );
+        $( '#index' ).removeClass( 'exporting' );
       })
     }) 
     
@@ -370,7 +370,7 @@ $(document).ready(function(){
       success: function (data) { 
         var result = $.parseJSON(data);
         
-        $( '#document-container' ).attr( 'class', 'exported' );
+        $( '#document-container' ).addClass( 'exported' );
         
         var code = new Array();
         code.push( '<article><pre><code class="generic-code"></code></pre></article>' );
@@ -552,28 +552,31 @@ $(document).ready(function(){
   }) 
 
   // Settings Menu
-  $( '#settings-menu' ).live( 'click', function() {
-    if( $( '#settings-wrap' ).length == 0 ){
-      // Wrappers
-      var wrappers = new Array();
-      wrappers.push( '<div id="settings-wrap-wrap"><div id="settings-wrap"><h1>Settings</h1><ul id="settings"></ul></div></div>');
-
-      // Settings
-      var settings = new Array();
-
-      // Theme Settings
-      settings.push( '<li><input type="radio" name="theme" value="Dark Theme" /><label for="theme"> Dark Theme</label></li>' );
-
-      $( '#index' ).append( wrappers.join('') );
-      $( '#settings-wrap' ).hide();
-      $( '#settings' ).append( settings.join('') );
-      
-      $( '#settings-wrap' ).fadeIn( 300 );
-
+  $( '#theme-toggle' ).click( function() {
+  
+    // Changing classes before ajax request makes
+    // the app seem faster 
+    if( $( '#index' ).hasClass( 'dark' ) ) {
+      $( '#index' ).removeClass( 'dark' );
+    } else {
+      $( '#index' ).addClass( 'dark' );
     }
+
+    $.ajax({
+      url: siteUrl + 'settings/change_theme',
+      dataType: "json",
+      success: function( data ) {
+        var result = data;
+        console.log( result );
+      },
+      error: function( error ) {
+        var errorMsg = error;
+        console.log( errorMsg ); 
+      }
+    })
 
     return false;
 
-  })
+  });
 
 }); 

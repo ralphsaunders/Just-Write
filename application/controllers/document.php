@@ -98,12 +98,21 @@ class Document extends CI_Controller {
     $this->load->model( 'document_model' );
     if( $query = $this->document_model->load_last_open_document() )
     {
-      $data['title'] = 'Just Write';
       $data['last_open_document'] = $query[0];
       $data['users_documents'] = $query;
+      
+      $this->load->model( 'settings_model' ); 
+      if( $settings = $this->settings_model->fetch_users_settings() );
+      { 
+        $data['settings'] = $settings;
+      }
+
+      $data['title'] = 'Just Write';
       $data['main_content'] = 'writer';
       $this->load->view('includes/template', $data);
-    } else {
+    } 
+    else
+    {
       redirect('document', 'refresh'); 
     }
   }

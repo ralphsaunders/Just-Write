@@ -9,6 +9,7 @@
 
 /* - Common Styles */
 #index, textarea, input { font: 14px/24px Helvetica, Arial, Sans-serif; color:#1A1A1A; }
+#index.dark, .dark textarea, .dark input { color:#E8E8E8; } /* Dark Theme */
 .tool-tip { color:#FCFBFB; font:0.875em/1.188em Helvetica, Arial; }
 .error { font-weight:bold; color:#E01B1B; }
 .confirmation { font-weight:bold; color:#74BA1E; }
@@ -51,6 +52,10 @@ a { font-weight:bold; text-decoration:none; color:#B5B5B5; }
 a:hover { color:#666666; }
 #published-document a { font-weight:normal; color:#8A8A8A; }
 #published-document a:hover { color:#6E6E6E; border-bottom:1px dashed #FA9005; }
+
+/*   |- Dark Theme */
+.dark a { color:#707070; }
+.dark a:hover { color:#8C8C8C; }
 
 /* - Specific Styles */
 
