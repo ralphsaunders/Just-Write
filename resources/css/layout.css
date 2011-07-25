@@ -336,7 +336,14 @@
 #app-controls { position:absolute; bottom:20px; width:94%; padding:0 3%; }
 #app-controls li { list-style:none; }
 #app-controls a { display:block; }
-#app-controls img, #login img { vertical-align:-3px; margin-right:10px; }
+#app-controls img, #login img { vertical-align:-3px; margin-right:15px; }
+
+/*   |- Theme Toggle */
+#theme-toggle { width:15px; height:15px; background-image:url('../imgs/theme-toggle.png'); }
+.dark #theme-toggle { background:url('../imgs/theme-toggle.png') 0 15px; }
+
+/*   |- UI Toggle */
+#ui-toggle { position:relative; top:-6px; }
 
 /* | All Documents List */
 #all-documents {

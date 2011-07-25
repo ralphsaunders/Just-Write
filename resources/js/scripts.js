@@ -64,38 +64,13 @@ $(document).ready(function(){
 
   // Hides the control bar unless mouse is moving
   function hideControls() {
-    // $( '#main-menu, #logout' ).fadeOut( 500 );
+    $( '#main-menu, #logout, #theme-toggle' ).fadeToggle( 500 );
   }
 
-  // Damn dirty hack, but it works
-  var i = null;
-  var focused = false;
+  $( '#ui-toggle' ).click( function() {
+    hideControls();
+  }) 
 
-  $( 'input[name$=current-doc-title]' ).live( 'focus', function() {
-    // Stops UI from hiding
-    focused = true;
-  })
-
-  if( $( '#index' ).attr( 'class' ) == 'exporting' ) {
-    focused = true;
-  }
-
-  $( 'input[name$=current-doc-title]' ).live( 'blur', function() {
-    focused = false;
-  })
-
-  $( '#index' ).mousemove( function() {
-    clearTimeout( i );
-
-    if( $( '#index' ).attr( 'class' ) == null ) {
-      $( '#main-menu, #logout' ).fadeIn( 300 );
-    }
-
-    if ( focused == false ) {
-      i = setTimeout( hideControls, 6000);
-    }
-  })
- 
   function refreshDocuments(fn) {
     // List documents from this user
     $.ajax({ 

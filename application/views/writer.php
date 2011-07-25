@@ -90,12 +90,15 @@
 <nav id="app-controls">
   <ul>
     <li class="left">
-      <a href="#" title="Toggle Theme" id="theme-toggle">
-        <img src="<?php echo base_url(); ?>resources/imgs/theme-toggle.png" alt="Toggle Theme" />
+      <a href="#" title="Toggle UI" id="ui-toggle">
+        <img src="<?php echo base_url(); ?>resources/imgs/ui-toggle.png" alt="Hide UI" />
       </a>
     </li> 
+    <li class="left">
+      <a href="#" title="Toggle Theme" id="theme-toggle"></a>
+    </li> 
     <li class="right">
-      <a href="<?php echo site_url( 'session/destroy' ); ?>" title="Logout">
+      <a href="<?php echo site_url( 'session/destroy' ); ?>" title="Logout" id="logout">
         <img src="<?php echo base_url(); ?>resources/imgs/log-out.png" alt="Logout" />Logout
       </a>
     </li>
