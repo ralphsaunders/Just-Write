@@ -28,7 +28,10 @@
         echo form_input('key', 'key');
       } 
 
-      echo form_submit('submit', 'Login');
+      if( !isset( $confirmation ) )
+      {
+        echo form_submit('submit', 'Change Password');
+      }
     ?>
     </form>
     <?php

@@ -333,7 +333,7 @@
 
 
 /* | Logout/login */
-#app-controls { position:absolute; bottom:20px; width:94%; padding:0 3%; }
+#app-controls { position:absolute; bottom:15px; width:94%; padding:0 3%; }
 #app-controls li { list-style:none; }
 #app-controls a { display:block; }
 #app-controls img, #login img { vertical-align:-3px; margin-right:15px; }

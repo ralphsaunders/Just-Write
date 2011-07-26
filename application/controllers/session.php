@@ -16,13 +16,14 @@ class Session extends CI_Controller {
     $query = $this->membership_model->validate();
 
     if($query){
+
       $data = array(
         'username' => $this->input->post('username'),
         'is_logged_in' => true
       );
       
       $this->session->set_userdata($data);
-
+      
       redirect('document/load_last_open_document', 'refresh'); 
     } else {
       $data['title'] = "Login Error | Just Write";

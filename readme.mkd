@@ -6,3 +6,6 @@ If you want to run Just Write on your own server, you'll need to change a few th
 - Lines 4 and 5 of /resources/js/scripts.php 
 - The key on Line 227 of /application/config/config.php should be set by you and should be as random as possible.
 
+## People who have made contributions to this project
+
+- Chris Hendrix helped migrate user passwords from SHA512 to bcrypt + unique salt. [github](https://github.com/chendrix), [twitter](https://twitter.com/materialdesignr), [website](http://www.material-designer.com/).

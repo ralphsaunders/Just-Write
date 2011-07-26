@@ -2,47 +2,117 @@
 
 class Membership_model extends CI_Model
 {
-  public function hash_password($password)
+  public function old_hash_password($password)
   {
     return hash_hmac( "sha512", $password, $this->config->item('encryption_key') );
+  }
+  
+  public function hash_password( $password, $salt = null )
+  {
+    // Salt
+    if( !isset( $salt ) )
+    {
+      $type = '$2a';
+      $num_rounds = '$10';
+      $random_string = '$' . $this->generate_random_string() . '$';
+      $salt = $type . $num_rounds . $random_string;
+    }
+    
+    // Actual hash
+    return array('salt' => $salt, 'hash' => crypt( $password, $salt )) ;   
+  }
+
+
+  public function generate_random_string() 
+  {
+    return substr(str_replace('+', '.', base64_encode(pack('N4', mt_rand(), mt_rand(), mt_rand(), mt_rand()))), 0, 22);  
   }
 
   function validate()
   {
     $this->db->where('username', $this->input->post('username'));
-    $this->db->where('password', $this->hash_password($this->input->post('password')));
     $query = $this->db->get('users');
 
-    if($query->num_rows == 1){
-      return true;
-    } else { 
+    if($query->num_rows() == 1){
+      $user = $query->row();
+
+      if( isset( $user->migrated ) != NULL )
+      {
+        $hash = $this->hash_password( $this->input->post( 'password' ), $user->salt );
+        if( $hash['hash'] == $user->password )
+        // Validate using new hash algo
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+      else
+      {
+        if( $this->old_hash_password( $this->input->post( 'password' ) ) == $user->password )
+        // Validate using old algo
+        {
+          // Migrate user
+          $this->migrate_user();
+          // Validate again
+          $this->validate();
+
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+      }
+    } 
+    else 
+    { 
       return false;
     }
   }
-
-  function create_member()
+  
+  public function migrate_user()
+  {
+    // Encode password using new hash
+    $migration = $this->hash_password( $this->input->post('password') );
+    $hash = $migration['hash'];
+    $salt = $migration['salt'];
+    
+    $data = array(
+      'password' => $hash,
+      'salt'     => $salt,
+      'migrated' => true
+    );
+    
+    $this->db->where( 'username', $this->input->post( 'username' ) );
+    $this->db->update( 'users', $data );
+  }
+  
+  function create_user()
   {
     $this->db->where('username', $this->input->post('username'));
+    $this->db->where('email', $this->input->post('email'));
     $query = $this->db->get('users');
 
-    if($query->num_rows == 0){
-      $this->db->where('email', $this->input->post('email'));
-      $query = $this->db->get('users');
+    if($query->num_rows() == 0)
+    {
+      $password = $this->hash_password( $this->input->post( 'password' ) );
       
-      if($query->num_rows == 0){
+      $new_member_insert_data = array(
+        'username' => $this->input->post('username'),
+        'email'    => $this->input->post('email'),
+        'password' => $password['hash'],
+        'salt'     => $password['salt'],
+        'migrated' => true
+      );
 
-        $new_member_insert_data = array(
-          'username' => $this->input->post('username'),
-          'email' => $this->input->post('email'),
-          'password' => $this->hash_password($this->input->post('password')),
-        );
-
-        $insert = $this->db->insert('users', $new_member_insert_data);
-        return $insert;
-      } else {
-        return false; 
-      }
-    } else {
+      $this->db->insert('users', $new_member_insert_data);
+      return true;
+    } 
+    else
+    {
       return false; 
     }
   }
@@ -117,8 +187,11 @@ class Membership_model extends CI_Model
 
     if( $query->num_rows() == 1 )
     {
+      $password = $this->hash_password( $this->input->post( 'password' ) );
       $new_password = array(
-        'password'  => $this->hash_password( $this->input->post('password') ),
+        'password'  => $password['hash'],
+        'salt'      => $password['salt'],
+        'migrated'  => true ,
         'reset_key' => null
       );
 
@@ -133,23 +206,4 @@ class Membership_model extends CI_Model
     }
   }
 
-  function store_email()
-  // For when we go alpha 
-  {
-    $this->db->where('email', $this->input->post('email'));
-    $query = $this->db->get('invitees');
-
-
-    if($query->num_rows == 0){
-      $email_to_invite = array(
-        'email' => $this->input->post('email')
-      );
-
-      $insert = $this->db->insert('invitees', $email_to_invite);
-      return $insert;
-    } else {
-      return false;
-    }
-  }
 }
-?>

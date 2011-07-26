@@ -24,7 +24,7 @@ class Member extends CI_Controller {
       $this->load->view('includes/template', $data);
     } else {
       $this->load->model('membership_model');
-      if($query = $this->membership_model->create_member()){
+      if($query = $this->membership_model->create_user()){
         $data['title'] = 'Write Web App';
         $data['main_content'] = 'landing';
         $data['confirmation'] = "Your account was created, you can now login";
