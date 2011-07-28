@@ -6,6 +6,7 @@
 - Save current document when user logs out.
 - Refactor CSS
 - Refactor Javascript
+- Recolour icons for the dark theme as they're a little bright
 
 ## Suggestions from [Mattieu Dufour](http://www.matthieudufour.com/ "He's awesome")
 
