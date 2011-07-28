@@ -316,14 +316,29 @@
   border-top:1px solid #aacffa;
 }
 
-.edit a { padding:5px 10px; color:#fff; }
+.edit a { padding:4px 9px!important; color:#fff; }
 .more { float:right!important; margin-right:50px!important; }
 
 /*   |- Dark Theme */
 .dark #export a { background:#141414; border-bottom:1px dashed #2E2E2E; }
 .dark #title input { color:#A8A8A8; }
 .dark .button a:hover { color:#FCFBFB; }
-.dark .edit a { box-shadow: 0px 1px #383838; }
+.dark .edit a { 
+  box-shadow: 0px 1px #383838; 
+  background-color:#3C9FE6;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3C9FE6), to(#2A87C9));
+  border-top: 1px solid #48AEF7;
+  border-bottom: 1px solid #2581C2;
+}
+
+.dark .edit a:hover { 
+  background-color:#59B5F7;
+  background: -webkit-gradient(linear, left top, left bottom, from(#59B5F7), to(#4DA9EB));
+  border-top: 1px solid #69BDFA;
+  border-bottom: 1px solid #419EE0;
+  color:#fff;
+  box-shadow: 0px 0px 10px #1881CC;
+}
 
 /* | Document textarea */
 #document-container { padding:70px 40px 50px 40px; background-color:#FCFCFC; }
@@ -360,6 +375,9 @@
   border-radius:5px;
   box-shadow:0px 0px 10px #9C9C9C;
 }
+
+/*   |- Dark Theme */
+.dark #all-documents { background-color:#171717; box-shadow:0px 0px 10px #404040; }
 
 #all-documents-list { height:315px; overflow-y:auto }
 #all-documents-list li { clear:both; margin-bottom:10px; overflow:hidden; list-style:none; }

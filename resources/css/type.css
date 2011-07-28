@@ -86,6 +86,10 @@ a:hover { color:#666666; }
 .more a{ color:#61A0E8; }
 .more a:hover { color:#306FB8; }
 
+/*   |- Dark Theme */
+.dark .more a { color:#3C9FE6; }
+.dark .more a:hover { color:#59B5F7; }
+
 /* | Document */
 #document { font:1.286em/2em Georgia, Serif; }
 
