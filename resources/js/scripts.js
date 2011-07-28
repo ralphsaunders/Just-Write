@@ -185,7 +185,11 @@ $(document).ready(function(){
     var content = $( '#document' ).val();
     var id = $( '#document' ).attr( 'class' );
 
-    $( '#saving-icon' ).fadeIn( 50 );
+    if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){ 
+      // because .not() doesn't work 
+    } else {
+      $( '#saving-icon' ).fadeIn( 50 );
+    }
 
     $.ajax({
       url: siteUrl + 'document/save',
@@ -196,12 +200,16 @@ $(document).ready(function(){
         var result = $.parseJSON(data);
       
         $( '#document' ).attr( 'class', result );
-
-        $( '#saving-icon' ).fadeOut( 300 );
-        $( '#saved' ).stop( true, true ).delay( 400 ).fadeIn( 100 ).delay( 1000 ).fadeOut( function() {
-          refreshDocuments( function() {
-            $( '.delete a' ).hide();
-          })
+        
+        if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){
+          // because .not() doesn't work
+        } else { 
+          $( '#saving-icon' ).fadeOut( 300 );
+          $( '#saved' ).stop( true, true ).delay( 400 ).fadeIn( 100 ).delay( 1000 ).fadeOut( 200 );
+        }
+        
+        refreshDocuments( function() {
+          $( '.delete a' ).hide();
         })
 
         // Google Analytics 
@@ -542,11 +550,9 @@ $(document).ready(function(){
       dataType: "json",
       success: function( data ) {
         var result = data;
-        console.log( result );
       },
       error: function( error ) {
         var errorMsg = error;
-        console.log( errorMsg ); 
       }
     })
 

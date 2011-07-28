@@ -56,10 +56,15 @@ class Membership_model extends CI_Model
         {
           // Migrate user
           $this->migrate_user();
+          
+          if( $this->validate() )
           // Validate again
-          $this->validate();
-
-          return true;
+          {
+            return true;
+          } else {
+            return false;
+          }
+        
         }
         else
         {
@@ -191,7 +196,7 @@ class Membership_model extends CI_Model
       $new_password = array(
         'password'  => $password['hash'],
         'salt'      => $password['salt'],
-        'migrated'  => true ,
+        'migrated'  => true,
         'reset_key' => null
       );
 
