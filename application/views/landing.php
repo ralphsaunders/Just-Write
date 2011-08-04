@@ -220,7 +220,6 @@
 
 <!-- Page Specific Scripts -->
 <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/jquery.fancybox-1.3.4.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>resources/js/jquery.easing-1.3.pack.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>resources/js/jquery.mousewheel-3.0.4.pack.js"></script>
 <script type="text/javascript">
 $( document ).ready( function() {

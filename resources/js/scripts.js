@@ -53,8 +53,8 @@ $(document).ready(function(){
   // Hides the document controls dropdown
   $( '#document-controls' ).hide();
   
-  // Hides the loader
-  $( '#saving img' ).hide();
+  // Hides the spinner
+  $( '#saving-icon' ).hide();
 
   // Hides the saved icon
   $( '#saved' ).hide();
@@ -64,12 +64,19 @@ $(document).ready(function(){
 
   // Hides the control bar unless mouse is moving
   function hideControls() {
-    $( '#main-menu, #logout, #theme-toggle' ).fadeToggle( 500 );
+    $( '#main-menu, #logout, #theme-toggle' ).fadeToggle( 500, "easeOutExpo" );
   }
 
   $( '#ui-toggle' ).click( function() {
     hideControls();
-  }) 
+  })
+
+  // Spinner
+  function repositionSpinner() {
+    $( '#saving-icon' ).css( 'background-position-y', '-=21px' );
+  }
+
+  setInterval( repositionSpinner, 60 ); 
 
   function refreshDocuments(fn) {
     // List documents from this user
@@ -106,9 +113,9 @@ $(document).ready(function(){
   // Get an up to date list of documents for the current user
   $( 'a[href$=#document-controls]' ).live( 'click', function() {
     refreshDocuments( function() {
-      $( '.delete a' ).hide();
+      $( '.delete' ).hide();
     })
-    $( '#document-controls' ).slideToggle( 100 );
+    $( '#document-controls' ).slideToggle( 300, "easeOutBack" );
     return false;
   }) 
 
@@ -140,7 +147,7 @@ $(document).ready(function(){
   // Open
   $(document).bind( 'keydown', 'Ctrl+o', function() {
     refreshDocuments( function() {
-      $( '.delete a' ).hide();
+      $( '.delete' ).hide();
     })
     $( '#document-controls' ).slideToggle( 100 );
     return false;
@@ -149,7 +156,7 @@ $(document).ready(function(){
   // Open re-bind
   $( '#document' ).bind( 'keydown', 'Ctrl+o', function() {
     refreshDocuments( function() {
-      $( '.delete a' ).hide();
+      $( '.delete' ).hide();
     })
     $( '#document-controls' ).slideToggle( 100 );
     return false;
@@ -188,36 +195,39 @@ $(document).ready(function(){
     if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){ 
       // because .not() doesn't work 
     } else {
-      $( '#saving-icon' ).fadeIn( 50 );
+      $( '#saving-icon' ).fadeIn( 200, save );
     }
+    
+    function save() {
+      $.ajax({
+        url: siteUrl + 'document/save',
+        type: "POST",
+        data: ({ id:id, content:content, title:title }),
+        async: false,
+        success: function (data) { 
+          var result = $.parseJSON(data);
 
-    $.ajax({
-      url: siteUrl + 'document/save',
-      type: "POST",
-      data: ({ id:id, content:content, title:title }),
-      async: false,
-      success: function (data) { 
-        var result = $.parseJSON(data);
-      
-        $( '#document' ).attr( 'class', result );
-        
-        if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){
-          // because .not() doesn't work
-        } else { 
-          $( '#saving-icon' ).fadeOut( 300 );
-          $( '#saved' ).stop( true, true ).delay( 400 ).fadeIn( 100 ).delay( 1000 ).fadeOut( 200 );
+          $( '#document' ).attr( 'class', result );
+          
+          if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){
+            // because .not() doesn't work
+          } else {
+            $( '#saving-icon' ).delay( 400 ).fadeOut( 300, "easeOutExpo", function() {
+              $( '#saved' ).stop( true, true ).fadeIn( 100 ).delay( 1000 ).fadeOut( 200 );
+            })
+          }
+          
+          refreshDocuments( function() {
+            $( '.delete' ).hide();
+          })
+
+          // Google Analytics 
+          // _trackEvent(category, action, opt_label, opt_value)
+          _gaq.push(['_trackEvent', 'Doc', 'Saved', '/document/save' + result ]);
+
         }
-        
-        refreshDocuments( function() {
-          $( '.delete a' ).hide();
-        })
-
-        // Google Analytics 
-        // _trackEvent(category, action, opt_label, opt_value)
-        _gaq.push(['_trackEvent', 'Doc', 'Saved', '/document/save' + result ]);
-
-      }
-    })
+      })
+    }
   }
 
   // Loads a selected document
@@ -251,7 +261,7 @@ $(document).ready(function(){
 
         // Update document list ( for height reasons )
         refreshDocuments( function() {
-          $( '.delete a' ).hide();
+          $( '.delete' ).hide();
         })
 
         // Google Analytics 
@@ -266,14 +276,13 @@ $(document).ready(function(){
 
   // Resets input fields - database will then create new document when it's saved
   $( 'a[href$=new-document]' ).live( 'click', function() {
-      
-    saveDocument();
     
-    // Reset document fields
+    saveDocument();
+      
     $( 'input[name$=current-doc-title]' ).val( 'Untitled Document' );
     $( '#document' ).val( '' ).focus();
     $( '#document' ).attr( 'class', '' );
-
+    
     // Google Analytics 
     // _trackEvent(category, action, opt_label, opt_value)
     _gaq.push(['_trackEvent', 'Doc', 'Created', '/document/' ]);
@@ -283,11 +292,16 @@ $(document).ready(function(){
 
   // Toggle edit controls
   $( '.edit' ).live( 'click', function() {
-    $( '.delete a' ).toggle( 200 );
-    if ( $( this ).html() == '<a href="#" title="Edit Documents">Edit</a>' ) {
-      $( this ).html ( '<a href="#" title="Done Editing">Done</a>' );
+    if( $( '.delete' ).is( ':visible' ) ) {
+      $( '.delete' ).hide();
     } else {
-      $( this ).html ( '<a href="#" title="Edit Documents">Edit</a>' );
+      $( '.delete' ).toggle( 300 );
+    }
+
+    if ( $( this ).html() == '<a href="#" title="Edit Documents">Edit</a>' ) {
+      $( this ).html( '<a href="#" title="Done Editing">Done</a>' );
+    } else {
+      $( this ).html( '<a href="#" title="Edit Documents">Edit</a>' );
     }
     return false;
   })
@@ -349,7 +363,6 @@ $(document).ready(function(){
       url: siteUrl + 'document/markdown_to_html',
       type: "POST",
       data: ({ id:id, content:content, title:title }),
-      async: false,
       success: function (data) { 
         var result = $.parseJSON(data);
         
@@ -449,7 +462,7 @@ $(document).ready(function(){
   }
 
   $( '.close' ).live( 'click', function() {
-    $( this ).parent().fadeToggle( function() {
+    $( this ).parent().fadeOut( 800, "easeOutExpo", function() {
       if( $( this ).parent().attr( "id" ) == 'login-form-wrap' ) {
         $( this ).parent().remove()
       } else {
@@ -474,6 +487,9 @@ $(document).ready(function(){
 
   // Publish Document
   $( '.publish' ).live( 'click', function() {
+
+    saveDocument();
+
     var title = $( 'input[name$=current-doc-title]' ).val();
     var content = $( '#document' ).val();
     var id = $( '#document' ).attr( 'class' );
@@ -495,7 +511,7 @@ $(document).ready(function(){
   })
 
   $( '#export-dropdown, #export a' ).live( 'click', function() {
-    $( '#export, .arrow' ).toggle();
+    $( '#export, .arrow' ).fadeToggle( 500, "easeOutExpo" );
   })
 
   $( '#login' ).live( 'click', function() {
@@ -525,7 +541,7 @@ $(document).ready(function(){
 
       $( '#index' ).append( form.join('') );
       $( '#login-form-wrap' ).hide();
-      $( '#login-form-wrap' ).fadeIn( 300 );
+      $( '#login-form-wrap' ).fadeIn( 500, "easeOutExpo" );
       
       inputPrep();
 

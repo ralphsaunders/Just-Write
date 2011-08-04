@@ -50,7 +50,7 @@
     <li id="current-doc-controls">
       <span id="save" class="button">
         <span id="saving">
-          <img id="saving-icon" src="<?php echo base_url(); ?>resources/imgs/loader.gif" alt="saving" width="20" height="20" />
+          <span id="saving-icon"></span> 
           <img id="saved" src="<?php echo base_url(); ?>resources/imgs/tick.png" alt="saved" width="10" height="10" />
         </span>
         <a href="#save" title="save document">Save</a>

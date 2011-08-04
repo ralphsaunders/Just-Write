@@ -125,7 +125,7 @@
 /* - Specific Styles */
 
 /* | Body of page */
-#index { position:relative; background:#F7F7F7; }
+#index { background:#F7F7F7; }
 #index.dark { background:#2B2B2B; } /* Dark Theme */
 
 /* | Landing page */
@@ -211,9 +211,11 @@
 
 #document-controls { background-color:#FCFCFC; overflow:hidden; padding:5px; float:left; width:100%; margin:0; }
 .dark #document-controls { background-color:#454545; }
-#document-controls li { display:block; float:left;  text-decoration:none; margin-right:10px; }
+#document-controls li { display:block; float:left;  text-decoration:none; margin-right:10px; height:auto; }
 .block li { float:none!important; }
 #document-controls a, #all-documents li a { padding-right:10px; }
+.delete a { width:20px; display:block; float:left; padding-right:0!important; }
+.delete { display:inline-block; vertical-align:-7px; width:20px; }
 
 #new-document img { vertical-align:1px; }
 
@@ -253,7 +255,7 @@
 }
 
 #save { float:left; }
-#saving { vertical-align:-4px; margin-right:10px; width:20px; display:inline-block; }
+#saving { vertical-align:-5px; margin-right:10px; width:20px; display:inline-block; }
 
 #saved {
   padding:3px;
@@ -267,6 +269,9 @@
   width:10px;
   height:10px;
 }
+
+/*   |- Spinner icon */
+#saving-icon { width:20px; height:21px; display:block; background:url( '../imgs/spinner.png' ) 0px 0px; }
 
 .arrow { 
   border-width:15px;
