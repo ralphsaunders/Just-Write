@@ -112,7 +112,10 @@ $(document).ready(function(){
 
   // Get an up to date list of documents for the current user
   $( 'a[href$=#document-controls]' ).live( 'click', function() {
-    $( '#document-controls' ).slideToggle( 300, "easeOutBack" );
+   refreshDocuments( function() {
+      $( '.delete' ).hide();
+      $( '#document-controls' ).slideToggle( 300, "easeOutBack" );
+    }) 
     return false;
   }) 
 

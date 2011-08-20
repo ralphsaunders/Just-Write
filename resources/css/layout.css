@@ -422,4 +422,7 @@ div.edit { margin-top:20px; }
   #all-documents { width:300px; margin-left:-170px; }
   #all-documents-list .doc-title { width:160px; }
 
+  /* Control Bar */
+  #doc-link img { margin-right:10px; }
+
 }

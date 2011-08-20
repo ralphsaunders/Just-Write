@@ -22,6 +22,10 @@
   <!-- Humans -->
   <link rel="author" href="<?php echo base_url(); ?>humans.txt" />
 
+  <!-- iPhone Viewport Size -->
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+
+
   <!-- Google Analytics -->
   <script type="text/javascript">
 
