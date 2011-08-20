@@ -3,6 +3,9 @@
   <a href="<?php echo base_url(); ?>" title="Just Write Homepage" ><img src="<?php echo base_url(); ?>resources/imgs/just-write-logo.png" alt="Just Write" /></a>
 
   <div id="signup-form" class="generic-form">
+
+    <?php echo validation_errors('<p class="error">'); ?>
+
     <?php
       echo form_open('member/create_member');
       echo form_label('Username:', 'username');
@@ -15,10 +18,12 @@
       echo form_label('Password:', 'password');
       echo form_password('password', set_value('Your password is required', 'Password'));
 
+      echo form_label('Confirm Password:', 'password');
+      echo form_password('confirm_password', set_value('Your password is required', 'Password') );
+
       echo form_submit('submit', 'Sign me up!');
     ?>
 
-    <?php echo validation_errors('<p class="error">'); ?>
     <?php if(isset($error)): ?>
       <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
