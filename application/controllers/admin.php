@@ -37,9 +37,15 @@ class Admin extends CI_Controller {
     else
     {
       $this->load->model( 'admin_model' );
-      if( $query = $this->admin_model->members_registered_past_day() )
+      
+      if( $members_registered = $this->admin_model->members_registered_past_day() )
       {
-        $data['members_registered'] = $query;
+        $data['members_registered'] = $members_registered;
+      }
+
+      if( $documents_edited = $this->admin_model->documents_edited_past_day() )
+      {
+        $data['documents_edited'] = $documents_edited;
       }
 
       $data['title'] = 'Admin panel | Just Write';

@@ -3,13 +3,33 @@
 <p>Page rendered in {elapsed_time} seconds</p>
 
 <p>
-<?php if( !isset( $members_registered ) ) : ?>
-0
-<?php else: ?>
-<?php echo $members_registered; ?>
-<?php endif; ?>
- members have registered today.
+  <?php
+    if( !isset( $members_registered ) )
+    {
+      echo "0";
+    }
+    else
+    {
+      echo $members_registered;
+    }
+  ?>
+ members have registered so far today.
 </p>
+
+<p>
+  <?php
+    if( !isset( $documents_edited ) )
+    {
+      echo "0";
+    }
+    else
+    {
+      echo $documents_edited;
+    }
+  ?>
+ documents have been edited so far today.
+</p>
+
 
 <?php echo anchor( 'document/load_last_open_document', 'Write' ); ?>
 <br>

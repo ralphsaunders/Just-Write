@@ -28,7 +28,19 @@ class Admin_model extends CI_Model
    */
   function documents_edited_past_day()
   {
-    return false;
+    
+    $this->db->where( 'last_edited >', date('Y-m-d') );
+    $query = $this->db->get( 'documents' );
+
+    if( $query->num_rows() > 0 )
+    {
+      return $query->num_rows(); 
+    }
+    else
+    {
+      return false;
+    }
+    
   }
 
 }
