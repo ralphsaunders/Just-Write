@@ -30,9 +30,18 @@ class Admin extends CI_Controller {
 
   public function index()
   {
-    if( !$this->_is_admin() ){
+    if( !$this->_is_admin() )
+    {
       redirect( 'site', 'refresh' ); 
-    } else {
+    }
+    else
+    {
+      $this->load->model( 'admin_model' );
+      if( $query = $this->admin_model->members_registered_past_day() )
+      {
+        $data['members_registered'] = $query;
+      }
+
       $data['title'] = 'Admin panel | Just Write';
       $data['main_content'] = 'admin';
       $this->load->view('includes/template', $data);
