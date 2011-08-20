@@ -12,7 +12,6 @@
 ## Suggestions from [Mattieu Dufour](http://www.matthieudufour.com/ "He's awesome")
 
 - After saving the document, disable the save button until the document is modified. 
-- Documents should fade in and out when they're loaded.
 
 ## Suggestions from [Kevin Rocco Diale](http://kroccodiale.com "He's Awesome too")
 
