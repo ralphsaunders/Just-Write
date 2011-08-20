@@ -28,12 +28,31 @@ class Membership_model extends CI_Model
     return substr(str_replace('+', '.', base64_encode(pack('N4', mt_rand(), mt_rand(), mt_rand(), mt_rand()))), 0, 22);  
   }
 
+  public function user_is_admin()
+  {
+    $this->db->where( 'username', $this->input->post( 'username' ));
+    $this->db->where( 'admin', true );
+
+    $query = $this->db->get( 'users' );
+    
+    if( $query->num_rows() == 1 )
+    // User is admin
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
   function validate()
   {
     $this->db->where('username', $this->input->post('username'));
     $query = $this->db->get('users');
 
-    if($query->num_rows() == 1){
+    if($query->num_rows() == 1)
+    {
       $user = $query->row();
 
       if( isset( $user->migrated ) != NULL )
@@ -42,7 +61,16 @@ class Membership_model extends CI_Model
         if( $hash['hash'] == $user->password )
         // Validate using new hash algo
         {
-          return true;
+          if( $this->user_is_admin() )
+          // Check if user is admin
+          {
+            return array( 'admin' => true );
+          }
+          else
+          // They still validated but aren't an admin 
+          {
+            return true;
+          }
         }
         else
         {
@@ -54,17 +82,25 @@ class Membership_model extends CI_Model
         if( $this->old_hash_password( $this->input->post( 'password' ) ) == $user->password )
         // Validate using old algo
         {
+          // If their details were valid...
+          
           // Migrate user
           $this->migrate_user();
           
           if( $this->validate() )
           // Validate again
           {
-            return true;
-          } else {
-            return false;
+            if( $this->user_is_admin() )
+            // Check if user is admin
+            {
+              return array( 'admin' => true );
+            }
+            else
+            // They still validated but aren't an admin 
+            {
+              return true;
+            }
           }
-        
         }
         else
         {

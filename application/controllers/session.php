@@ -21,10 +21,22 @@ class Session extends CI_Controller {
         'username' => $this->input->post('username'),
         'is_logged_in' => true
       );
+
+      if( isset( $query['admin'] ) && $query['admin'] == true )
+      {
+        $data[ 'is_admin' ] = true;
+      }
+
+      $this->session->set_userdata( $data );
       
-      $this->session->set_userdata($data);
-      
-      redirect('document/load_last_open_document', 'refresh'); 
+      if( !isset( $query['admin'] ) || $query['admin'] != true )
+      { 
+        redirect('document/load_last_open_document', 'refresh'); 
+      }
+      else
+      {
+        redirect( 'admin', 'refresh' );
+      }
     } else {
       $data['title'] = "Login Error | Just Write";
       $data['error'] = "You entered an incorrect username or password.";
