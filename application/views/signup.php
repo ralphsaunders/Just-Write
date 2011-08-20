@@ -24,11 +24,7 @@
     <?php endif; ?>
     </form>
 
-    <p>Got an account? 
-      <a id="login" href="" title="Login to write">
-        <img src="<?php echo base_url(); ?>resources/imgs/log-in.png" alt="->" />Login
-      </a>
-    </p>
+    <p>Got an account? <a id="login" href="" title="Login to write">Login</a></p>
   </div>
 
 </section>

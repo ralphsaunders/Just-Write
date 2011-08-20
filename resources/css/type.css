@@ -74,7 +74,6 @@ a:hover { color:#666666; }
 #login-form h2, #login-form a { color:#fff; }
 
 /* | Sign up call to action */
-.container { width:400px; margin:0 auto; padding-top:50px; }
 #sign-up { padding:6px 22px; background-color:#363636; color:#fcfbfb; border-radius:5px; }
 #sign-up:hover { background-color:#3c9fe6; }
 

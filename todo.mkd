@@ -3,12 +3,11 @@
 - When you hit delete, it should show a confirm button; we all misclick sometimes.
 - Change .live( 'click', function() { ... } ); to .delegate() or w/e ( faster )
 - Consistent shortcuts
-- Save current document when user logs out.
 - Tighten up the animations
 - Refactor CSS
 - Refactor Javascript
 - Recolour icons for the dark theme as they're a little bright
-- Add away to remove published documents
+- Add a way to remove published documents
 
 ## Suggestions from [Mattieu Dufour](http://www.matthieudufour.com/ "He's awesome")
 

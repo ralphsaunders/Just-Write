@@ -128,12 +128,16 @@ class Document_model extends CI_Model
       $i = 0;
       foreach( $query->result() as $row )
       {
-        if( $i < 5 )
+        if( $i <= 5 )
         {
           if( $i == 0 )
+          // Don't truncate the first document's title as it's
+          // the one that's going to be displayed by default.
           {
             $results[] = $row;
-          } else {
+          } 
+          else
+          {
             $row->title = $this->truncate( $row->title, 15 );
             $results[] = $row;
           }

@@ -48,7 +48,7 @@
 }
 .generic-form form { text-align:left; }
 .generic-form label { margin-top:1em; display:block; }
-.generic-form p, .generic-form a { margin-top:1em; display:block; }
+.generic-form p, .generic-form a { margin-top:1em; display:inline-block; }
 
 /* | Generic Navigation */
 .generic-menu-heading { display:block; margin-bottom:0.5em; }
@@ -127,6 +127,7 @@
 /* | Body of page */
 #index { background:#F7F7F7; }
 #index.dark { background:#2B2B2B; } /* Dark Theme */
+.container { margin-bottom:40px; overflow:hidden; width:402px; margin:40px auto; }
 
 /* | Landing page */
 #container { width:960px; margin:0 auto; position:relative; }
@@ -322,7 +323,7 @@
 }
 
 .edit a { padding:4px 9px!important; color:#fff; }
-.more { float:right!important; margin-right:50px!important; }
+.more { float:right!important; margin-right:40px!important; }
 
 /*   |- Dark Theme */
 .dark #export a { background:#141414; border-bottom:1px dashed #2E2E2E; }

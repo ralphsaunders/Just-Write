@@ -14,11 +14,11 @@
 <nav id="main-menu">
   <ul id="document-controls">
     <li>Recent Documents</li>
-    <?php if( isset( $users_documents ) ): ?>
+    <?php if( isset( $users_documents ) ): $i = 0; ?>
       <?php foreach( $users_documents as $doc ): ?>
         <li class="<?php echo $doc->id; ?>">
           <span class="delete">
-            <a class="<?php echo $doc->id; ?>" href="#" title="Delete <?php echo html_entity_decode( $doc->title, ENT_QUOTES, "UTF-8" ); ?>">
+            <a class="<?php echo $doc->id; ?>" href="#" title="Delete <?php echo $doc->title; ?>">
               <img src="<?php echo base_url(); ?>resources/imgs/delete.png" alt="Delete" />
             </a>
           </span>
@@ -32,7 +32,7 @@
             <?php // var_dump($doc); ?> 
           </a>
         </li>
-      <?php endforeach; ?>
+      <?php $i++; endforeach; ?>
     <?php endif; ?> 
     <li class="edit"><a href="#" title="Edit Documents">Edit</a></li>
     <li class="more"><a href="#" title="load all documents">More</a></li>

@@ -112,9 +112,6 @@ $(document).ready(function(){
 
   // Get an up to date list of documents for the current user
   $( 'a[href$=#document-controls]' ).live( 'click', function() {
-    refreshDocuments( function() {
-      $( '.delete' ).hide();
-    })
     $( '#document-controls' ).slideToggle( 300, "easeOutBack" );
     return false;
   }) 
@@ -181,10 +178,7 @@ $(document).ready(function(){
 
   // Every 60 seconds
   setInterval( function() {
-    //If document controls is hidden, save document
-    if( $( '#document-controls' ).is( ':hidden' ) && $( '#all-documents' ).is( ':hidden' ) && $( '#document-container' ).attr() == null ){
-      saveDocument();
-    }
+    saveDocument();
   }, 60000 )
   
   function saveDocument() {
@@ -195,81 +189,81 @@ $(document).ready(function(){
     if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){ 
       // because .not() doesn't work 
     } else {
-      $( '#saving-icon' ).fadeIn( 200, save );
+      $( '#saving-icon' ).fadeIn( 200 );
     }
     
-    function save() {
-      $.ajax({
-        url: siteUrl + 'document/save',
-        type: "POST",
-        data: ({ id:id, content:content, title:title }),
-        async: false,
-        success: function (data) { 
-          var result = $.parseJSON(data);
-
-          $( '#document' ).attr( 'class', result );
-          
-          if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){
-            // because .not() doesn't work
-          } else {
-            $( '#saving-icon' ).delay( 400 ).fadeOut( 300, "easeOutExpo", function() {
-              $( '#saved' ).stop( true, true ).fadeIn( 100 ).delay( 1000 ).fadeOut( 200 );
-            })
-          }
-          
-          refreshDocuments( function() {
-            $( '.delete' ).hide();
-          })
-
-          // Google Analytics 
-          // _trackEvent(category, action, opt_label, opt_value)
-          _gaq.push(['_trackEvent', 'Doc', 'Saved', '/document/save' + result ]);
-
-        }
-      })
-    }
-  }
-
-  // Loads a selected document
-  $( '.load' ).live( 'click', function() {
-
-    // Save current document
-    //saveDocument();
-
-    $.ajax({ 
-      url: siteUrl + 'document/load',
+    $.ajax({
+      url: siteUrl + 'document/save',
       type: "POST",
-      data: ({ id: this.getAttribute( 'id' ) }),
-      success: function (data) {
-        var doc = $.parseJSON(data);
+      data: ({ id:id, content:content, title:title }),
+      async: false,
+      success: function (data) { 
+        var result = $.parseJSON(data);
+
+        $( '#document' ).attr( 'class', result );
         
-        // Hide document control panel
-        if( $( '#document-controls' ).is( ':visible' ) ){
-          $( '#document-controls' ).slideToggle( 300 );
+        if( $( '#main-menu, #logout, #theme-toggle' ).is( ':hidden' ) ){
+          // because .not() doesn't work
+        } else {
+          $( '#saving-icon' ).delay( 400 ).fadeOut( 300, "easeOutExpo", function() {
+            $( '#saved' ).stop( true, true ).fadeIn( 100 ).delay( 1000 ).fadeOut( 200 );
+          })
         }
-       
-        if( $( '#all-documents' ).is( ':visible' ) ){
-          $( '#all-documents' ).fadeToggle( function() {
-            $( '#all-documents' ).remove();
-          }) 
-        }
-
-        // Load in new data
-        $( 'input[name$=current-doc-title]' ).val( doc.title );
-        $( '#document' ).val( doc.content ).focus();
-        $( '#document' ).attr( 'class', doc.id );
-
-        // Update document list ( for height reasons )
+        
         refreshDocuments( function() {
           $( '.delete' ).hide();
         })
 
         // Google Analytics 
         // _trackEvent(category, action, opt_label, opt_value)
-        _gaq.push(['_trackEvent', 'Doc', 'Loaded', '/document/' + doc.id ]);
+        _gaq.push(['_trackEvent', 'Doc', 'Saved', '/document/save' + result ]);
 
       }
     })
+  }
+
+  // Loads a selected document
+  $( '.load' ).live( 'click', function() {
+
+    // Save current document
+    // I think I need an asynchronous save and a synchronous save function
+    // saveDocument();
+
+      $.ajax({ 
+        url: siteUrl + 'document/load',
+        type: "POST",
+        data: ({ id: this.getAttribute( 'id' ) }),
+        success: function (data) {
+          var doc = $.parseJSON(data);
+          console.log( doc );
+          
+          // Hide document control panel
+          if( $( '#document-controls' ).is( ':visible' ) ){
+            $( '#document-controls' ).slideToggle( 300 );
+          }
+         
+          if( $( '#all-documents' ).is( ':visible' ) ){
+            $( '#all-documents' ).fadeToggle( function() {
+              $( '#all-documents' ).remove();
+            }) 
+          }
+
+          // Load in new data
+          $( 'input[name$=current-doc-title]' ).val( doc.title );
+          $( '#document' ).val( doc.content ).focus();
+          $( '#document' ).attr( 'class', doc.id );
+
+          // Update document list ( for height reasons )
+          refreshDocuments( function() {
+            $( '.delete' ).hide();
+          })
+
+          // Google Analytics 
+          // _trackEvent(category, action, opt_label, opt_value)
+          _gaq.push(['_trackEvent', 'Doc', 'Loaded', '/document/' + doc.id ]);
+
+        }
+      })
 
     return false;
   })
@@ -456,7 +450,7 @@ $(document).ready(function(){
         $( '#all-documents' ).hide();
         $( '#all-documents-list' ).append( list.join('') );
         $( '#all-documents' ).fadeToggle( 300 );
-        $( '.delete a' ).hide();
+        $( '.delete' ).hide();
       }
     })
   }
@@ -575,5 +569,13 @@ $(document).ready(function(){
     return false;
 
   });
+
+  // Save document before user logs out
+  $( '#logout' ).live( 'click', function() {
+    saveDocument();
+    return true;
+  })
+
+
 
 }); 
