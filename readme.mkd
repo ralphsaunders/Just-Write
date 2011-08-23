@@ -26,78 +26,78 @@ You'll need to update the database config file found in /application/config/data
 
 #### Database Structure
 
-+--------------------------+
-| Tables_in_writing-webapp |
-+--------------------------+
-| documents                |
-| exported_documents       |
-| published_documents      |
-| settings                 |
-| users                    |
-+--------------------------+
-5 rows in set (0.00 sec)
+    +--------------------------+
+    | Tables_in_writing-webapp |
+    +--------------------------+
+    | documents                |
+    | exported_documents       |
+    | published_documents      |
+    | settings                 |
+    | users                    |
+    +--------------------------+
+    5 rows in set (0.00 sec)
 
-Table documents:
-+-------------+-----------+------+-----+-------------------+-----------------------------+
-| Field       | Type      | Null | Key | Default           | Extra                       |
-+-------------+-----------+------+-----+-------------------+-----------------------------+
-| id          | int(11)   | NO   | PRI | NULL              | auto_increment              |
-| user_id     | int(11)   | NO   |     | NULL              |                             |
-| content     | text      | NO   |     | NULL              |                             |
-| title       | text      | NO   |     | NULL              |                             |
-| last_edited | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
-+-------------+-----------+------+-----+-------------------+-----------------------------+
-5 rows in set (0.16 sec)
+    Table documents:
+    +-------------+-----------+------+-----+-------------------+-----------------------------+
+    | Field       | Type      | Null | Key | Default           | Extra                       |
+    +-------------+-----------+------+-----+-------------------+-----------------------------+
+    | id          | int(11)   | NO   | PRI | NULL              | auto_increment              |
+    | user_id     | int(11)   | NO   |     | NULL              |                             |
+    | content     | text      | NO   |     | NULL              |                             |
+    | title       | text      | NO   |     | NULL              |                             |
+    | last_edited | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+    +-------------+-----------+------+-----+-------------------+-----------------------------+
+    5 rows in set (0.16 sec)
 
-Table exported_documents
-+-------------+-----------+------+-----+-------------------+-----------------------------+
-| Field       | Type      | Null | Key | Default           | Extra                       |
-+-------------+-----------+------+-----+-------------------+-----------------------------+
-| id          | int(11)   | NO   | PRI | NULL              | auto_increment              |
-| user_id     | int(11)   | NO   |     | NULL              |                             |
-| origin_id   | int(11)   | NO   |     | NULL              |                             |
-| content     | text      | NO   |     | NULL              |                             |
-| title       | text      | NO   |     | NULL              |                             |
-| last_edited | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
-+-------------+-----------+------+-----+-------------------+-----------------------------+
-6 rows in set (0.08 sec)
+    Table exported_documents
+    +-------------+-----------+------+-----+-------------------+-----------------------------+
+    | Field       | Type      | Null | Key | Default           | Extra                       |
+    +-------------+-----------+------+-----+-------------------+-----------------------------+
+    | id          | int(11)   | NO   | PRI | NULL              | auto_increment              |
+    | user_id     | int(11)   | NO   |     | NULL              |                             |
+    | origin_id   | int(11)   | NO   |     | NULL              |                             |
+    | content     | text      | NO   |     | NULL              |                             |
+    | title       | text      | NO   |     | NULL              |                             |
+    | last_edited | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+    +-------------+-----------+------+-----+-------------------+-----------------------------+
+    6 rows in set (0.08 sec)
 
-Table published_documents
-+------------------+-----------+------+-----+-------------------+-----------------------------+
-| Field            | Type      | Null | Key | Default           | Extra                       |
-+------------------+-----------+------+-----+-------------------+-----------------------------+
-| id               | int(11)   | NO   | PRI | NULL              | auto_increment              |
-| user_id          | int(11)   | NO   |     | NULL              |                             |
-| username         | text      | NO   |     | NULL              |                             |
-| origin_id        | int(11)   | NO   |     | NULL              |                             |
-| content          | text      | NO   |     | NULL              |                             |
-| title            | text      | NO   |     | NULL              |                             |
-| export_timestamp | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
-+------------------+-----------+------+-----+-------------------+-----------------------------+
-7 rows in set (0.11 sec)
+    Table published_documents
+    +------------------+-----------+------+-----+-------------------+-----------------------------+
+    | Field            | Type      | Null | Key | Default           | Extra                       |
+    +------------------+-----------+------+-----+-------------------+-----------------------------+
+    | id               | int(11)   | NO   | PRI | NULL              | auto_increment              |
+    | user_id          | int(11)   | NO   |     | NULL              |                             |
+    | username         | text      | NO   |     | NULL              |                             |
+    | origin_id        | int(11)   | NO   |     | NULL              |                             |
+    | content          | text      | NO   |     | NULL              |                             |
+    | title            | text      | NO   |     | NULL              |                             |
+    | export_timestamp | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+    +------------------+-----------+------+-----+-------------------+-----------------------------+
+    7 rows in set (0.11 sec)
 
-Table settings
-+---------+------------+------+-----+---------+----------------+
-| Field   | Type       | Null | Key | Default | Extra          |
-+---------+------------+------+-----+---------+----------------+
-| id      | int(11)    | NO   | PRI | NULL    | auto_increment |
-| user_id | int(11)    | NO   |     | NULL    |                |
-| theme   | tinyint(4) | YES  |     | NULL    |                |
-+---------+------------+------+-----+---------+----------------+
-3 rows in set (0.03 sec)
+    Table settings
+    +---------+------------+------+-----+---------+----------------+
+    | Field   | Type       | Null | Key | Default | Extra          |
+    +---------+------------+------+-----+---------+----------------+
+    | id      | int(11)    | NO   | PRI | NULL    | auto_increment |
+    | user_id | int(11)    | NO   |     | NULL    |                |
+    | theme   | tinyint(4) | YES  |     | NULL    |                |
+    +---------+------------+------+-----+---------+----------------+
+    3 rows in set (0.03 sec)
 
-Table users:
-+-----------+--------------+------+-----+-------------------+-----------------------------+
-| Field     | Type         | Null | Key | Default           | Extra                       |
-+-----------+--------------+------+-----+-------------------+-----------------------------+
-| id        | int(11)      | NO   | PRI | NULL              | auto_increment              |
-| username  | varchar(255) | NO   |     | NULL              |                             |
-| password  | varchar(128) | NO   |     | NULL              |                             |
-| salt      | text         | NO   |     | NULL              |                             |
-| migrated  | tinyint(1)   | YES  |     | NULL              |                             |
-| email     | varchar(255) | NO   |     | NULL              |                             |
-| timestamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
-| reset_key | text         | YES  |     | NULL              |                             |
-| admin     | tinyint(1)   | YES  |     | NULL              |                             |
-+-----------+--------------+------+-----+-------------------+-----------------------------+
-9 rows in set (0.14 sec)
+    Table users:
+    +-----------+--------------+------+-----+-------------------+-----------------------------+
+    | Field     | Type         | Null | Key | Default           | Extra                       |
+    +-----------+--------------+------+-----+-------------------+-----------------------------+
+    | id        | int(11)      | NO   | PRI | NULL              | auto_increment              |
+    | username  | varchar(255) | NO   |     | NULL              |                             |
+    | password  | varchar(128) | NO   |     | NULL              |                             |
+    | salt      | text         | NO   |     | NULL              |                             |
+    | migrated  | tinyint(1)   | YES  |     | NULL              |                             |
+    | email     | varchar(255) | NO   |     | NULL              |                             |
+    | timestamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+    | reset_key | text         | YES  |     | NULL              |                             |
+    | admin     | tinyint(1)   | YES  |     | NULL              |                             |
+    +-----------+--------------+------+-----+-------------------+-----------------------------+
+    9 rows in set (0.14 sec)
