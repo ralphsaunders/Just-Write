@@ -7,15 +7,19 @@ class Admin extends CI_Controller {
   *
   * Maps to the following URL
   * 		http://example.com/index.php/admin
-  *	- or -  
+  *	- or -
   * 		http://example.com/index.php/admin/index
   *	- or -
-  * 
+  *
   * So any other public methods not prefixed with an underscore will
-  * map to /index.php/welcome/<method_name>
+  * map to /index.php/admin/<method_name>
   * @see http://codeigniter.com/user_guide/general/urls.html
   */
 
+  /**
+   * Checks user's session data for "is_admin" key.
+   * Returns false unless "is_admin" is set and true.
+   */
   function _is_admin()
   {
     $is_admin = $this->session->userdata('is_admin');
@@ -28,16 +32,20 @@ class Admin extends CI_Controller {
     }
   }
 
+  /**
+   * Redirects user to the site controller unless
+   * _is_admin() returns true.
+   */
   public function index()
   {
     if( !$this->_is_admin() )
     {
-      redirect( 'site', 'refresh' ); 
+      redirect( 'site', 'refresh' );
     }
     else
     {
       $this->load->model( 'admin_model' );
-      
+
       if( $members_registered = $this->admin_model->members_registered_past_day() )
       {
         $data['members_registered'] = $members_registered;

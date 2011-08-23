@@ -9,12 +9,17 @@
 - Recolour icons for the dark theme as they're a little bright
 - Add a way to remove published documents
 
+## Suggestions fom Steve + Kennth
+
+- Centeralise a config file. No need for a swtich statement.
+- Readme should detail how to set error messages.
+- Store user's ID in session
+
 ## Suggestions from [Mattieu Dufour](http://www.matthieudufour.com/ "He's awesome")
 
-- After saving the document, disable the save button until the document is modified. 
+- After saving the document, disable the save button until the document is modified.
 
 ## Suggestions from [Kevin Rocco Diale](http://kroccodiale.com "He's Awesome too")
 
 - Mobile Stylesheet, for quick note taking.
-- Confirmation of password on signup ( double field ).
 - oAuth ( two click ) signup. Would be useful for sharing of documents too. Twitter first. [Twitter Library CI](https://github.com/elliothaughin/codeigniter-twitter "SWEEET!").

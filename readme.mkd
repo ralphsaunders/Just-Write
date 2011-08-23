@@ -1,11 +1,103 @@
 # Readme
 
-If you want to run Just Write on your own server, you'll need to change a few things:
-
-- Line 17 of /application/config/config.php
-- Lines 4 and 5 of /resources/js/scripts.php 
-- The key on Line 227 of /application/config/config.php should be set by you and should be as random as possible.
-
 ## People who have made contributions to this project
 
 - Chris Hendrix helped migrate user passwords from SHA512 to bcrypt + unique salt. [github](https://github.com/chendrix), [twitter](https://twitter.com/materialdesignr), [website](http://www.material-designer.com/).
+
+## Want to run Just Write on your own server? You'll need to do some prep first:
+
+### Config Changes
+
+- You'll need to change the base url defined on line 17 of /application/config/config.php.
+
+The base url is the url to your CodeIgniter root folder. If you're running WAMP like I am it'll look something link this, where "sub-directory" is the folder you placed Just Write in:
+
+    http://localhost/sub-directory
+
+- You should generate your own encryption key defined on line 227 of /application/config/config.php. The one currently there is just an example.
+
+- You'll also need to update the if statement on line 6 of /resources/js/scripts.js.
+
+### Database Setup
+
+You'll be wanting to setup your MySQL database according the structure below. To help with this, I've left a schema file (writing-webapp-schema.sql) in the root that you can import using phpMyAdmin.
+
+You'll need to update the database config file found in /application/config/database.php.
+
+#### Database Structure
+
++--------------------------+
+| Tables_in_writing-webapp |
++--------------------------+
+| documents                |
+| exported_documents       |
+| published_documents      |
+| settings                 |
+| users                    |
++--------------------------+
+5 rows in set (0.00 sec)
+
+Table documents:
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra                       |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| id          | int(11)   | NO   | PRI | NULL              | auto_increment              |
+| user_id     | int(11)   | NO   |     | NULL              |                             |
+| content     | text      | NO   |     | NULL              |                             |
+| title       | text      | NO   |     | NULL              |                             |
+| last_edited | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+5 rows in set (0.16 sec)
+
+Table exported_documents
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| Field       | Type      | Null | Key | Default           | Extra                       |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+| id          | int(11)   | NO   | PRI | NULL              | auto_increment              |
+| user_id     | int(11)   | NO   |     | NULL              |                             |
+| origin_id   | int(11)   | NO   |     | NULL              |                             |
+| content     | text      | NO   |     | NULL              |                             |
+| title       | text      | NO   |     | NULL              |                             |
+| last_edited | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++-------------+-----------+------+-----+-------------------+-----------------------------+
+6 rows in set (0.08 sec)
+
+Table published_documents
++------------------+-----------+------+-----+-------------------+-----------------------------+
+| Field            | Type      | Null | Key | Default           | Extra                       |
++------------------+-----------+------+-----+-------------------+-----------------------------+
+| id               | int(11)   | NO   | PRI | NULL              | auto_increment              |
+| user_id          | int(11)   | NO   |     | NULL              |                             |
+| username         | text      | NO   |     | NULL              |                             |
+| origin_id        | int(11)   | NO   |     | NULL              |                             |
+| content          | text      | NO   |     | NULL              |                             |
+| title            | text      | NO   |     | NULL              |                             |
+| export_timestamp | timestamp | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
++------------------+-----------+------+-----+-------------------+-----------------------------+
+7 rows in set (0.11 sec)
+
+Table settings
++---------+------------+------+-----+---------+----------------+
+| Field   | Type       | Null | Key | Default | Extra          |
++---------+------------+------+-----+---------+----------------+
+| id      | int(11)    | NO   | PRI | NULL    | auto_increment |
+| user_id | int(11)    | NO   |     | NULL    |                |
+| theme   | tinyint(4) | YES  |     | NULL    |                |
++---------+------------+------+-----+---------+----------------+
+3 rows in set (0.03 sec)
+
+Table users:
++-----------+--------------+------+-----+-------------------+-----------------------------+
+| Field     | Type         | Null | Key | Default           | Extra                       |
++-----------+--------------+------+-----+-------------------+-----------------------------+
+| id        | int(11)      | NO   | PRI | NULL              | auto_increment              |
+| username  | varchar(255) | NO   |     | NULL              |                             |
+| password  | varchar(128) | NO   |     | NULL              |                             |
+| salt      | text         | NO   |     | NULL              |                             |
+| migrated  | tinyint(1)   | YES  |     | NULL              |                             |
+| email     | varchar(255) | NO   |     | NULL              |                             |
+| timestamp | timestamp    | YES  |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+| reset_key | text         | YES  |     | NULL              |                             |
+| admin     | tinyint(1)   | YES  |     | NULL              |                             |
++-----------+--------------+------+-----+-------------------+-----------------------------+
+9 rows in set (0.14 sec)
