@@ -9,10 +9,8 @@
 - Recolour icons for the dark theme as they're a little bright
 - Add a way to remove published documents
 
-## Suggestions fom Steve + Kennth
+## Suggestions fom [Kenneth](http://twitter.com/kennethlove)
 
-- Centeralise a config file. No need for a swtich statement.
-- Readme should detail how to set error messages.
 - Store user's ID in session
 
 ## Suggestions from [Mattieu Dufour](http://www.matthieudufour.com/ "He's awesome")
